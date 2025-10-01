@@ -72,6 +72,7 @@ public:
     [[nodiscard]] const float GetPivotX() const { return pivot_.x; }
     [[nodiscard]] const float GetPivotY() const { return pivot_.y; }
     void SetPivot(const DirectX::XMFLOAT2& pivot) { pivot_ = pivot; }
+    void SetPivot(const float& pivot) { pivot_ = { pivot, pivot }; }
     void SetPivot(const float& x, const float& y) { pivot_ = { x, y }; }
     void SetPivotX(const float& x) { pivot_.x = x; }
     void SetPivotY(const float& y) { pivot_.y = y; }

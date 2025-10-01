@@ -7,10 +7,16 @@ public:
     Player();
     ~Player() {}
 
+    void Initialize();
+    void Update(const float& elapsedTime);
     void Render();
     void DrawDebug();
 
+    Transform2D* GetTransform() { return sprite_.GetTransform(); }
+
 private:
     Sprite sprite_;
+
+    float moveSpeed_ = 500.0f;
 };
 

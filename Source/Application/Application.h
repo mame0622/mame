@@ -5,6 +5,7 @@
 #include "HighResolutionTimer.h"
 #include "ImGui/ImGuiCtrl.h"
 #include "Graphics/Graphics.h"
+#include "Input/Input.h"
 
 class Application
 {
@@ -41,6 +42,7 @@ private:
 private:
     CONST HWND  hwnd_;
     Graphics    graphics_;
+    Input       input_;
 
     HighResolutionTimer tictoc_;
     uint32_t            frames_ = 0;

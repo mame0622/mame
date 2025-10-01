@@ -35,6 +35,8 @@ void PostProcess::Draw()
     renderer_->Draw(sceneBuffer_->GetColorMap().GetAddressOf(), 0, 1, postProcessPS_.Get());
 
     postProcess_->Deactivate();
+
+    renderer_->Draw(postProcess_->GetColorMap().GetAddressOf(), 0, 1, postProcessPS_.Get());
 }
 
 // ImGui

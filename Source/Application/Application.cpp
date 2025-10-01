@@ -4,13 +4,17 @@
 
 // コンストラクタ
 Application::Application(HWND hwnd)
-    : hwnd_(hwnd), graphics_(hwnd)
+    : hwnd_(hwnd), graphics_(hwnd), input_(hwnd)
 {
 }
 
 // 初期化
 const bool Application::Initialize()
 {
+    // Input初期設定
+    input_.GetMouse().SetScreenWidth(SCREEN_WIDTH);
+    input_.GetMouse().SetScreenHeight(SCREEN_HEIGHT);
+
     // Scene初期化
     SceneManager::Instance().Initilaize();
 
@@ -31,6 +35,9 @@ void Application::Update(const float& elapsedTime)
 {
     // ImGui更新
     IMGUI_CTRL_CLEAR_FRAME();
+
+    // 入力更新
+    input_.Update();
 
     // Scene更新
     SceneManager::Instance().Update(elapsedTime);
@@ -63,6 +70,7 @@ void Application::Render()
 // ImGui
 void Application::DrawDebug()
 {
+#if USE_IMGUI
     ImGuiViewport* viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(viewport->WorkPos);
     ImGui::SetNextWindowSize(viewport->WorkSize);
@@ -92,6 +100,8 @@ void Application::DrawDebug()
     SceneManager::Instance().DrawDebug();
 
     PostProcess::Instance().DrawDebug();
+
+#endif // USE_IMGUI
 }
 
 // 実行

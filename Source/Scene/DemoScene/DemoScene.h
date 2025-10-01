@@ -1,7 +1,6 @@
 #pragma once
 #include "Scene/BaseScene.h"
 #include <memory>
-#include "Object/Character/Player/Player.h"
 
 class DemoScene : public BaseScene
 {
@@ -17,6 +16,5 @@ public:
     void DrawDebug()                        override; // ImGui
 
 private:
-    Player player_;
 };
 

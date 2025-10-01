@@ -56,11 +56,12 @@ void SceneManager::Render()
 // ImGui
 void SceneManager::DrawDebug()
 {
+#if USE_IMGUI
     ImGui::Begin("SceneManager");
 
     if (ImGui::Button("DemoScene", ImVec2(100, 100)))
     {
-        //SceneManager::Instance().ChangeScene(new DemoScene);
+        SceneManager::Instance().ChangeScene(new DemoScene);
     }
     ImGui::SameLine();
     if (ImGui::Button("TitleScene", ImVec2(100, 100)))
@@ -75,6 +76,8 @@ void SceneManager::DrawDebug()
     {
         currentScene_->DrawDebug();
     }
+
+#endif // USE_IMGUI
 }
 
 // SceneƒNƒŠƒA
