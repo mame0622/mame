@@ -1,13 +1,11 @@
 #pragma once
 #include "Math/Transform.h"
 
-class Object
+class Enemy
 {
 public:
-    Object() {}
-    virtual ~Object() {}
-
-    virtual void DrawDebug(); // ImGui
+    Enemy() {}
+    virtual ~Enemy() {}
 
     Transform2D* GetTransform() { return &transform_; }
 

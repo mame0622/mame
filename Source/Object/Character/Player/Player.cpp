@@ -4,7 +4,7 @@
 
 // コンストラクタ
 Player::Player()
-    : sprite_(L"./Resources/Image/Player.png")
+    : spriteBatch_(L"./Resources/Image/Player.png", 1)
 {
 }
 
@@ -23,20 +23,22 @@ void Player::Update(const float& elapsedTime)
     const float aLx = Input::Instance().GetGamePad().GetAxisLx();
     const float aLy = Input::Instance().GetGamePad().GetAxisLy();
     const DirectX::XMFLOAT2 moveVec = XMFloat2Normalize({ aLx, aLy });
-    sprite_.GetTransform()->AddPositionX(moveSpeed_ * moveVec.x * elapsedTime);
-    sprite_.GetTransform()->AddPositionY(moveSpeed_ * moveVec.y * -1.0f * elapsedTime);
+    GetTransform()->AddPositionX(moveSpeed_ * moveVec.x * elapsedTime);
+    GetTransform()->AddPositionY(moveSpeed_ * moveVec.y * -1.0f * elapsedTime);
 
     // 旋回処理
     if(moveVec.x != 0.0f || moveVec.y != 0.0f)
     {
-        sprite_.GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveVec.x, moveVec.y)));
+        GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveVec.x, moveVec.y)));
     }
 }
 
 // 描画
 void Player::Render()
 {
-    sprite_.Render();
+    std::vector<Transform2D> transforms_;
+    transforms_.emplace_back(*GetTransform());
+    spriteBatch_.Render(transforms_);
 }
 
 // ImGui
@@ -45,7 +47,7 @@ void Player::DrawDebug()
 #if USE_IMGUI
     ImGui::Begin("Player");
 
-    sprite_.DrawDebug();
+    Object::DrawDebug();
 
     ImGui::End();
 #endif

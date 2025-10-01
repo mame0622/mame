@@ -1,21 +1,20 @@
 #pragma once
-#include "Resource/Sprite/Sprite.h"
+#include "Object/Character/Character.h"
+#include "Resource/Sprite/SpriteBatch.h"
 
-class Player
+class Player : public Character
 {
 public:
     Player();
-    ~Player() {}
+    ~Player() override {}
 
     void Initialize();
     void Update(const float& elapsedTime);
     void Render();
-    void DrawDebug();
-
-    Transform2D* GetTransform() { return sprite_.GetTransform(); }
+    void DrawDebug() override;
 
 private:
-    Sprite sprite_;
+    SpriteBatch spriteBatch_;
 
     float moveSpeed_ = 500.0f;
 };

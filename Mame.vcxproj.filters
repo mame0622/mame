@@ -76,6 +76,9 @@
     <Filter Include="Mame\Shader\FullScreenQuad">
       <UniqueIdentifier>{2396251a-9792-4196-bac8-3191f57e7718}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Character\Enemy">
+      <UniqueIdentifier>{3db8a319-3311-4cb2-81ad-fc8dec983959}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
@@ -162,7 +165,18 @@
     <ClCompile Include="Source\Input\Mouse.cpp">
       <Filter>Mame\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Object\Character\Player\PlayerManager.cpp" />
+    <ClCompile Include="Source\Object\Character\Enemy\Enemy.cpp">
+      <Filter>Mame\Object\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Character\Player\PlayerManager.cpp">
+      <Filter>Mame\Object\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Character\Enemy\EnemyManager.cpp">
+      <Filter>Mame\Object\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Character\Character.cpp">
+      <Filter>Mame\Object\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application\Application.h">
@@ -270,7 +284,18 @@
     <ClInclude Include="Source\Input\Mouse.h">
       <Filter>Mame\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Object\Character\Player\PlayerManager.h" />
+    <ClInclude Include="Source\Object\Character\Enemy\Enemy.h">
+      <Filter>Mame\Object\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Character\Player\PlayerManager.h">
+      <Filter>Mame\Object\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Character\Enemy\EnemyManager.h">
+      <Filter>Mame\Object\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Character\Character.h">
+      <Filter>Mame\Object\Character</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Shader\Sprite.hlsli">
