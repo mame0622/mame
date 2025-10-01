@@ -79,6 +79,9 @@
     <Filter Include="Mame\Object\Character\Enemy">
       <UniqueIdentifier>{3db8a319-3311-4cb2-81ad-fc8dec983959}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Bullet">
+      <UniqueIdentifier>{fe8e6a2b-2363-457e-be19-6cbc90a76d97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
@@ -176,6 +179,12 @@
     </ClCompile>
     <ClCompile Include="Source\Object\Character\Character.cpp">
       <Filter>Mame\Object\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\Bullet.cpp">
+      <Filter>Mame\Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletManager.cpp">
+      <Filter>Mame\Object\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +304,12 @@
     </ClInclude>
     <ClInclude Include="Source\Object\Character\Character.h">
       <Filter>Mame\Object\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\Bullet.h">
+      <Filter>Mame\Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletManager.h">
+      <Filter>Mame\Object\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

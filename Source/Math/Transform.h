@@ -84,10 +84,10 @@ public:
 
 private:
     DirectX::XMFLOAT2   position_   = {};                           // 位置
-    DirectX::XMFLOAT2   size_       = { 100.0f, 100.0f};            // 大きさ
+    DirectX::XMFLOAT2   size_       = { 100.0f, 100.0f };           // 大きさ
     DirectX::XMFLOAT4   color_      = { 1.0f, 1.0f, 1.0f, 1.0f };   // 色
     DirectX::XMFLOAT2   texPos_     = {};                           // UV座標
-    DirectX::XMFLOAT2   texSize_    = {};                           // UVサイズ
+    DirectX::XMFLOAT2   texSize_    = { 100.0f, 100.0f };           // UVサイズ
     DirectX::XMFLOAT2   pivot_      = {};                           // 回転中心点
     float               angle_      = 0.0f;                         // 角度
 };

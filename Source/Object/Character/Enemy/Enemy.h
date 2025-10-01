@@ -1,15 +1,25 @@
 #pragma once
-#include "Math/Transform.h"
+#include "Object/Character/Character.h"
+#include "EnemyManager.h"
 
-class Enemy
+class Enemy : public Character
 {
 public:
-    Enemy() {}
+    Enemy(const EnemyManager::EnemyType& enemyType);
     virtual ~Enemy() {}
 
-    Transform2D* GetTransform() { return &transform_; }
+    virtual void Initialize();
+    virtual void Update(const float& elapsedTime);
+
+    const EnemyManager::EnemyType GetEnemyType() const { return enemyType_; }
+    
+    // ---------- EnemyId ----------
+    void SetEnemyId(const int& enemyId) { enemyId_ = enemyId; }
+    const int GetEnemyId() const { return enemyId_; }
 
 private:
-    Transform2D transform_;
+    const EnemyManager::EnemyType enemyType_ = EnemyManager::EnemyType::Normal;
+    
+    int enemyId_;
 };
 

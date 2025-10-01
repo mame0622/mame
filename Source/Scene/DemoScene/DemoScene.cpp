@@ -2,6 +2,7 @@
 #include "Graphics/Graphics.h"
 #include "ImGui/ImGuiCtrl.h"
 #include "Object/Character/Player/PlayerManager.h"
+#include "Object/Character/Enemy/EnemyManager.h"
 
 // リソース生成
 void DemoScene::CreateResource()
@@ -19,12 +20,15 @@ void DemoScene::Initialize()
 // 終了化
 void DemoScene::Finalize()
 {
+    EnemyManager::Instance().Finalize();
 }
 
 // 更新
 void DemoScene::Update(const float& elapsedTime)
 {
     PlayerManager::Instance().Update(elapsedTime);
+
+    EnemyManager::Instance().Update(elapsedTime);
 }
 
 // 描画
@@ -35,10 +39,14 @@ void DemoScene::Render()
     Graphics::Instance().SetDepthStencileState(Shader::DepthState::ZT_OFF_ZW_OFF);
 
     PlayerManager::Instance().Render();
+
+    EnemyManager::Instance().Render();
 }
 
 // ImGui
 void DemoScene::DrawDebug()
 {
     PlayerManager::Instance().DrawDebug();
+
+    EnemyManager::Instance().DrawDebug();
 }
