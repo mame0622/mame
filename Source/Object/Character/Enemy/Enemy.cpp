@@ -12,5 +12,5 @@ void Enemy::Initialize()
 
 // XV
 void Enemy::Update(const float& elapsedTime)
-{
+{   
 }

@@ -16,6 +16,7 @@ void EnemyNormal::Update(const float& elapsedTime)
     //’ÇÕ
     Pursuit();
 
+    //ˆÚ“®
     Move(elapsedTime);
 }
 
@@ -32,7 +33,7 @@ void EnemyNormal::Pursuit()
     float length = sqrtf(GetVelocity().x * GetVelocity().x + GetVelocity().y + GetVelocity().y);
     SetVelocity(GetVelocity() / length);
 
-    GetTransform()->SetAngle(atan2(GetVelocity().y, GetVelocity().x));
+    GetTransform()->SetAngle(atan2f(GetVelocity().y, GetVelocity().x));
 }
 
 
