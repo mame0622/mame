@@ -66,6 +66,8 @@
     <ClInclude Include="External\ImGui\imstb_truetype.h" />
     <ClInclude Include="External\nlohmann\json.hpp" />
     <ClInclude Include="External\nlohmann\json_fwd.hpp" />
+    <ClInclude Include="Source\Ai\StateMachine\State.h" />
+    <ClInclude Include="Source\Ai\StateMachine\StateMachine.h" />
     <ClInclude Include="Source\Application\Application.h" />
     <ClInclude Include="Source\Application\Common.h" />
     <ClInclude Include="Source\Application\HighResolutionTimer.h" />

@@ -20,6 +20,6 @@ public:
 private:
     const EnemyManager::EnemyType enemyType_ = EnemyManager::EnemyType::Normal;
     
-    int enemyId_;
+    int enemyId_ = 0;
 };
 
