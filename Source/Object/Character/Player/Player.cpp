@@ -18,6 +18,7 @@ void Player::Initialize()
 // XV
 void Player::Update(const float& elapsedTime)
 {
+
     // ˆÚ“®ˆ—
     const float aLx = Input::Instance().GetGamePad().GetAxisLx();
     const float aLy = Input::Instance().GetGamePad().GetAxisLy();
