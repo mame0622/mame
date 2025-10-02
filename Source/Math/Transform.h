@@ -33,6 +33,11 @@ public:
     void SetSizeX(const float& x) { size_.x = x; }
     void SetSizeY(const float& y) { size_.y = y; }
 
+    // ---------- CenterPosition ----------
+    [[nodiscard]] const DirectX::XMFLOAT2 GetCenterPosition() { return position_ + size_ * 0.5f; }
+    [[nodiscard]] const float GetCenterPositionX() { return position_.x + size_.x * 0.5f; }
+    [[nodiscard]] const float GetCenterPositionY() { return position_.y + size_.y * 0.5f; }
+
     // ---------- Color ----------
     [[nodiscard]] const DirectX::XMFLOAT4 GetColor() const { return color_; }
     [[nodiscard]] const float GetColorR() const { return color_.x; }
