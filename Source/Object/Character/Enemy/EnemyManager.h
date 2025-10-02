@@ -34,6 +34,7 @@ public:
     void Register(Enemy* enemy) { generates_.insert(enemy); }
     void Remove(Enemy* enemy) { removes_.insert(enemy); }
     void Clear();
+    
 
 private:
     std::vector<Enemy*>         enemies_;
