@@ -20,6 +20,9 @@ public:
     void Render();
     void DrawDebug();
 
+    std::vector<Bullet>& GetBullets() { return bullets_; }
+    const int GetBulletCount() const { return maxBullets_; }
+
 private:
     const int maxBullets_ = 5;
     std::vector<Bullet> bullets_;

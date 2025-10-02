@@ -14,7 +14,12 @@ public:
 
     const BulletLevel GetBulletLevel() const { return level_; }
 
+    void SetCollisionRadius(const float& radius) { collisionRadius_ = radius; }
+    const float GetCollisionRadius() const { return collisionRadius_; }
+
 private:
     BulletLevel level_ = BulletLevel::One;
+
+    float collisionRadius_ = 1.0f;
 };
 
