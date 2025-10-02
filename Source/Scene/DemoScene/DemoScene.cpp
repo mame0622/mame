@@ -4,6 +4,7 @@
 #include "Object/Character/Player/PlayerManager.h"
 #include "Object/Character/Enemy/EnemyManager.h"
 #include "Object/Bullet/BulletManager.h"
+#include "Collision/CollisionManager.h"
 
 // ÉäÉ\Å[ÉXê∂ê¨
 void DemoScene::CreateResource()
@@ -32,6 +33,8 @@ void DemoScene::Update(const float& elapsedTime)
     EnemyManager::Instance().Update(elapsedTime);
 
     BulletManager::Instance().Update(elapsedTime);
+
+    CollisionManager::Instance().Update();
 }
 
 // ï`âÊ

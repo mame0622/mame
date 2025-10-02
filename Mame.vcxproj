@@ -30,6 +30,7 @@
     <ClCompile Include="External\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Source\Application\Application.cpp" />
     <ClCompile Include="Source\Application\Main.cpp" />
+    <ClCompile Include="Source\Collision\CollisionManager.cpp" />
     <ClCompile Include="Source\Graphics\FrameBuffer\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\FullscreenQuad\FullscreenQuad.cpp" />
     <ClCompile Include="Source\Graphics\Graphics.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="Source\Application\Common.h" />
     <ClInclude Include="Source\Application\HighResolutionTimer.h" />
     <ClInclude Include="Source\Application\Misc.h" />
+    <ClInclude Include="Source\Collision\CollisionManager.h" />
     <ClInclude Include="Source\Graphics\FrameBuffer\FrameBuffer.h" />
     <ClInclude Include="Source\Graphics\FullscreenQuad\FullscreenQuad.h" />
     <ClInclude Include="Source\Graphics\Graphics.h" />
