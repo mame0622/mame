@@ -20,13 +20,12 @@ void EnemyNormal::Update(const float& elapsedTime)
 
 void EnemyNormal::Pursuit(const float& elapsedTime)
 {
-    DirectX::XMFLOAT2 playerPosition = PlayerManager::Instance().GetTransform()->GetPosition();
-    DirectX::XMFLOAT2 moveVec = { 0,0 };
-    moveVec = playerPosition - GetTransform()->GetPosition();
-    moveVec = XMFloat2Normalize(moveVec);
-    
+    const DirectX::XMFLOAT2 playerCenterPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
+    const DirectX::XMFLOAT2 enemyCenterPosition = GetTransform()->GetCenterPosition();
+    const DirectX::XMFLOAT2 moveVec = XMFloat2Normalize(playerCenterPosition - enemyCenterPosition);
+
     GetTransform()->AddPosition(moveVec * moveSpeed_ * elapsedTime);
-    GetTransform()->SetAngle(atan2f(moveVec.y, moveVec.x) + DirectX::XM_PIDIV2);
+    GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveVec.y, moveVec.x) + DirectX::XM_PIDIV2));
 }
 
 
