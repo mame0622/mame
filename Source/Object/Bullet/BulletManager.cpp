@@ -12,6 +12,8 @@ BulletManager::BulletManager()
         bullet.GetTransform()->SetTexSize(bulletSize_);
         bullet.GetTransform()->SetPivot(bulletSize_ * 0.5f);
 
+        bullet.SetCollisionRadius(30.0f);
+
         bullets_.emplace_back(bullet);
     }
 
