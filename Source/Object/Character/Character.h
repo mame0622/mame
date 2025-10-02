@@ -7,14 +7,12 @@ public:
     Character() {}
     ~Character() override {}
 
-    // ë¨ìxéÊìæ
-    const DirectX::XMFLOAT2 GetVelocity() const { return velosity_; }
+    void DrawDebug();
 
-    // ë¨ìxê›íË
-    void SetVelocity(const DirectX::XMFLOAT2& velosity) { velosity_ = velosity; }
-    
+    void SetCollisionRadius(const float& radius) { collisionRadius_ = radius; }
+    const float GetCollisionRadius() const { return collisionRadius_; }
+
 private:
-    DirectX::XMFLOAT2 velosity_;
-
+    float collisionRadius_ = 1.0f;
 };
 

@@ -13,6 +13,8 @@ void Player::Initialize()
     GetTransform()->SetSize(50.0f);
     GetTransform()->SetTexSize(50.0f);
     GetTransform()->SetPivot(25.0f);
+    
+    SetCollisionRadius(25.0f);
 }
 
 // çXêV
@@ -47,6 +49,7 @@ void Player::DrawDebug()
     ImGui::Begin("Player");
 
     Object::DrawDebug();
+    Character::DrawDebug();
 
     ImGui::End();
 #endif

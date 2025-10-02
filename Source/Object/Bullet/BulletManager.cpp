@@ -85,5 +85,14 @@ void BulletManager::DrawDebug()
 
     ImGui::End(); // BulletManager
 
+    ImGui::Begin("Bullet List");
+
+    for (Bullet& bullet : bullets_)
+    {
+        bullet.DrawDebug();
+    }
+
+    ImGui::End(); // Bullet List
+
 #endif // USE_IMGUI
 }

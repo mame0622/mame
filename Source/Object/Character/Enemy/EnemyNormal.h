@@ -9,6 +9,7 @@ public:
 
     void Initialize() override;
     void Update(const float& elapsedTime) override;
+    void DrawDebug() override;
 
 private:
     void Pursuit(const float& elapsedTime);

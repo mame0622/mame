@@ -195,6 +195,9 @@
     <ClCompile Include="Source\Object\Character\Enemy\EnemyNormal.cpp">
       <Filter>Mame\Object\Character\Enemy\NormalEnemy</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Collision\CollisionManager.cpp">
+      <Filter>Mame\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application\Application.h">
@@ -328,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="Source\Object\Character\Enemy\EnemyNormal.h">
       <Filter>Mame\Object\Character\Enemy\NormalEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\CollisionManager.h">
+      <Filter>Mame\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
