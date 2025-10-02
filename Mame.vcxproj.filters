@@ -193,7 +193,7 @@
       <Filter>Mame\Object\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="Source\Object\Character\Enemy\EnemyNormal.cpp">
-      <Filter>Mame\Object\Character\Enemy</Filter>
+      <Filter>Mame\Object\Character\Enemy\NormalEnemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -327,7 +327,7 @@
       <Filter>Mame\Ai\StateMachine</Filter>
     </ClInclude>
     <ClInclude Include="Source\Object\Character\Enemy\EnemyNormal.h">
-      <Filter>Mame\Object\Character\Enemy</Filter>
+      <Filter>Mame\Object\Character\Enemy\NormalEnemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

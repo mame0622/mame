@@ -10,5 +10,11 @@ public:
     void Initialize() override;
     void Update(const float& elapsedTime) override;
 
-    
+private:
+    void Move(const float& elapsedTime);
+    void Pursuit();
+
+private:
+
+    float moveSpeed_ = 500.0f;
 };
