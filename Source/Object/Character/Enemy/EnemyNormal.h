@@ -11,8 +11,7 @@ public:
     void Update(const float& elapsedTime) override;
 
 private:
-    void Move(const float& elapsedTime);
-    void Pursuit();
+    void Pursuit(const float& elapsedTime);
 
 private:
 
