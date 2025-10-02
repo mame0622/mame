@@ -189,6 +189,9 @@
     <ClCompile Include="Source\Object\Bullet\BulletManager.cpp">
       <Filter>Mame\Object\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Object\Character\Enemy\EnemyNormal.cpp">
+      <Filter>Mame\Object\Character\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application\Application.h">
@@ -319,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="Source\Ai\StateMachine\StateMachine.h">
       <Filter>Mame\Ai\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Character\Enemy\EnemyNormal.h">
+      <Filter>Mame\Object\Character\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
