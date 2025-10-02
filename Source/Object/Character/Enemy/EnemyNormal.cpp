@@ -9,7 +9,9 @@ EnemyNormal::EnemyNormal()
 // ‰Šú‰»
 void EnemyNormal::Initialize()
 {
-
+    GetTransform()->SetSize(size_);
+    GetTransform()->SetTexSize(size_);
+    GetTransform()->SetPivot(size_ * 0.5f);
 }
 
 // XV

@@ -30,7 +30,5 @@ private:
     float radius_ = 50.0f;
 
     std::vector<SpriteBatch> spriteBatches_;
-
-    float size_ = 30.0f;
 };
 
