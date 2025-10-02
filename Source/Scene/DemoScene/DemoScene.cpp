@@ -3,6 +3,7 @@
 #include "ImGui/ImGuiCtrl.h"
 #include "Object/Character/Player/PlayerManager.h"
 #include "Object/Character/Enemy/EnemyManager.h"
+#include "Object/Bullet/BulletManager.h"
 
 // ÉäÉ\Å[ÉXê∂ê¨
 void DemoScene::CreateResource()
@@ -29,6 +30,8 @@ void DemoScene::Update(const float& elapsedTime)
     PlayerManager::Instance().Update(elapsedTime);
 
     EnemyManager::Instance().Update(elapsedTime);
+
+    BulletManager::Instance().Update(elapsedTime);
 }
 
 // ï`âÊ
@@ -41,6 +44,8 @@ void DemoScene::Render()
     PlayerManager::Instance().Render();
 
     EnemyManager::Instance().Render();
+
+    BulletManager::Instance().Render();
 }
 
 // ImGui
@@ -49,4 +54,6 @@ void DemoScene::DrawDebug()
     PlayerManager::Instance().DrawDebug();
 
     EnemyManager::Instance().DrawDebug();
+
+    BulletManager::Instance().DrawDebug();
 }
