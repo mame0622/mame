@@ -1,6 +1,5 @@
 #include "Enemy.h"
 
-// コンストラクタ
 Enemy::Enemy(const EnemyManager::EnemyType& enemyType)
     : enemyType_(enemyType)
 {

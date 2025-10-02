@@ -11,6 +11,7 @@ public:
     enum class EnemyType : int
     {
         Normal,
+        Homing,
         Max,
     };
 

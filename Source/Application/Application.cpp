@@ -2,7 +2,6 @@
 #include "Scene/SceneManager.h"
 #include "Graphics/PostProcess/PostProcess.h"
 
-// コンストラクタ
 Application::Application(HWND hwnd)
     : hwnd_(hwnd), graphics_(hwnd), input_(hwnd)
 {

@@ -2,9 +2,8 @@
 #include "ImGui/ImGuiCtrl.h"
 #include "Input/Input.h"
 
-// コンストラクタ
 Player::Player()
-    : spriteBatch_(L"./Resources/Image/Player.png", 1)
+    : spriteBatch_(L"./Resources/Image/Player/Player.png", 1)
 {
 }
 

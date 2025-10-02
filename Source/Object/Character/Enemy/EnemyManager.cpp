@@ -3,11 +3,11 @@
 #include "Application/Common.h"
 #include "ImGui/ImGuiCtrl.h"
 
-// コンストラクタ
 EnemyManager::EnemyManager()
 {
     // テクスチャ登録
-    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Player.png", 10));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy0.png", 10/*最大描画数*/));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 10));
 }
 
 // 終了化
@@ -29,11 +29,13 @@ void EnemyManager::Update(const float& elapsedTime)
     }
     generates_.clear();
 
+    // 更新
     for (Enemy*& enemy : enemies_)
     {
         enemy->Update(elapsedTime);
     }
 
+    // 削除処理
     for (Enemy* enemy : removes_)
     {
         auto it = std::find(enemies_.begin(), enemies_.end(), enemy);
@@ -71,9 +73,14 @@ void EnemyManager::DrawDebug()
 
     ImGui::Begin("EnemyManager");
 
-    if (ImGui::Button("Generate Enemy"))
+    ImGui::Text("Register Button");
+    if (ImGui::Button("Normal Enemy"))
     {
         Register(new Enemy(EnemyType::Normal));
+    }
+    if (ImGui::Button("Homing Enemy"))
+    {
+        Register(new Enemy(EnemyType::Homing));
     }
 
     ImGui::End(); // EnemyManager

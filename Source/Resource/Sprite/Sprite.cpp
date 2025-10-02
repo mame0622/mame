@@ -3,7 +3,6 @@
 #include "Graphics/Graphics.h"
 #include "Resource/Texture/Texture.h"
 
-// コンストラクタ
 Sprite::Sprite(const wchar_t* filename)
 {
     // 頂点情報のセット

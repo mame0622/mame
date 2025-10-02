@@ -7,7 +7,6 @@ static const int KeyMap[] =
 	VK_RBUTTON,		// 右ボタン
 };
 
-// コンストラクタ
 Mouse::Mouse(const HWND& hwnd)
 	: hwnd_(hwnd)
 {

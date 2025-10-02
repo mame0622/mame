@@ -2,7 +2,6 @@
 
 Input* Input::instance_ = nullptr;
 
-// コンストラクタ
 Input::Input(const HWND& hwnd)
     : mouse_(hwnd)
 {

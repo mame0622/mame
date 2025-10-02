@@ -4,7 +4,6 @@
 #include "Graphics/Graphics.h"
 #include "Resource/Texture/Texture.h"
 
-// コンストラクタ
 SpriteBatch::SpriteBatch(const wchar_t* filename, const size_t& maxSprites)
     : maxVertices_(maxSprites * 6)
 {
