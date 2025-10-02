@@ -1,6 +1,7 @@
 #include "EnemyManager.h"
 #include "Enemy.h"
 #include "EnemyNormal.h"
+#include "EnemyCharger.h"
 #include "Application/Common.h"
 #include "ImGui/ImGuiCtrl.h"
 
@@ -78,9 +79,9 @@ void EnemyManager::DrawDebug()
     {
         Register(new EnemyNormal());
     }
-    if (ImGui::Button("Homing Enemy"))
+    if (ImGui::Button("Charger Enemy"))
     {
-        Register(new Enemy(EnemyType::Homing, "HomingEnemy"));
+        Register(new EnemyCharger());
     }
 
     ImGui::End(); // EnemyManager
