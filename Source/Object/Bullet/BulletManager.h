@@ -27,7 +27,7 @@ private:
     const DirectX::XMFLOAT2 bulletSize_ = { 100.0f, 100.0f };
 
     float angle_ = 0.0f;
-    float radius_ = 3.0f;
+    float radius_ = 120.0f;
 
     std::vector<SpriteBatch> spriteBatches_;
 };

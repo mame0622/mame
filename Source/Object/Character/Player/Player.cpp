@@ -21,14 +21,14 @@ void Player::Update(const float& elapsedTime)
     // ˆÚ“®ˆ—
     const float aLx = Input::Instance().GetGamePad().GetAxisLx();
     const float aLy = Input::Instance().GetGamePad().GetAxisLy();
-    const DirectX::XMFLOAT2 moveVec = XMFloat2Normalize({ aLx, aLy });
+    const DirectX::XMFLOAT2 moveVec = XMFloat2Normalize({ aLx, -aLy });
     GetTransform()->AddPositionX(moveSpeed_ * moveVec.x * elapsedTime);
-    GetTransform()->AddPositionY(moveSpeed_ * moveVec.y * -1.0f * elapsedTime);
+    GetTransform()->AddPositionY(moveSpeed_ * moveVec.y * elapsedTime);
 
     // ù‰ñˆ—
     if(moveVec.x != 0.0f || moveVec.y != 0.0f)
     {
-        GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveVec.x, moveVec.y)));
+        GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveVec.y, moveVec.x) + DirectX::XM_PIDIV2));
     }
 }
 

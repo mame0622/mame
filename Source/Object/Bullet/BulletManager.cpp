@@ -27,9 +27,7 @@ BulletManager::BulletManager()
 void BulletManager::Update(const float& elapsedTime)
 {
     // Playerの画像の中心をTargetに設定する
-    const DirectX::XMFLOAT2 playerPosition = PlayerManager::Instance().GetTransform()->GetPosition();
-    const DirectX::XMFLOAT2 playerSize = PlayerManager::Instance().GetTransform()->GetSize();
-    const DirectX::XMFLOAT2 playerCenterPos = playerPosition + playerSize * 0.5f;
+    const DirectX::XMFLOAT2 playerCenterPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
 
     // Targetに対して円状になるようにBulletを配置する
     for (int i = 0; i < maxBullets_; ++i)
@@ -39,19 +37,21 @@ void BulletManager::Update(const float& elapsedTime)
         // Bulletの画像の中心を指定された位置に持っていく為のOffset
         const DirectX::XMFLOAT2 bulletOffset = bullets_.at(i).GetTransform()->GetSize() * 0.5f;
 
-        bullets_.at(i).GetTransform()->SetPositionX(playerCenterPos.x + radius_ * cos(angle) - bulletOffset.x);
-        bullets_.at(i).GetTransform()->SetPositionY(playerCenterPos.y + radius_ * sin(angle) - bulletOffset.y);
+        bullets_.at(i).GetTransform()->SetPositionX(playerCenterPosition.x + radius_ * cos(angle) - bulletOffset.x);
+        bullets_.at(i).GetTransform()->SetPositionY(playerCenterPosition.y + radius_ * sin(angle) - bulletOffset.y);
     }
 
     // Targetに対して辺が向くようにする
     for (int i = 0; i < maxBullets_; ++i)
     {
-        const DirectX::XMFLOAT2 bulletPosition = bullets_.at(i).GetTransform()->GetPosition();
-        const DirectX::XMFLOAT2 bulletOffset = bullets_.at(i).GetTransform()->GetSize() * 0.5f;
-        const DirectX::XMFLOAT2 direction = XMFloat2Normalize(bulletPosition + bulletOffset - playerCenterPos);
+        const DirectX::XMFLOAT2 bulletCenterPosition = bullets_.at(i).GetTransform()->GetCenterPosition();
 
-        bullets_.at(i).GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(direction.x, direction.y)));
+        const DirectX::XMFLOAT2 direction = XMFloat2Normalize(bulletCenterPosition - playerCenterPosition);
+
+        bullets_.at(i).GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(direction.y, direction.x) + DirectX::XM_PIDIV2));
     }
+
+    angle_ += elapsedTime;
 }
 
 // 描画
@@ -82,6 +82,8 @@ void BulletManager::DrawDebug()
     ImGui::DragFloat("Radius", &radius_, 1.0f);
 
     ImGui::DragFloat("Angle", &angle_, 1.0f);
+
+    bullets_.at(0).DrawDebug();
 
     ImGui::End(); // BulletManager
 
