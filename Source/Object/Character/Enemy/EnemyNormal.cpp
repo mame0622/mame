@@ -6,18 +6,21 @@ EnemyNormal::EnemyNormal()
 {
 }
 
+// 初期化
 void EnemyNormal::Initialize()
 {
 
 }
 
+// 更新
 void EnemyNormal::Update(const float& elapsedTime)
 {
-    //追跡移動
+    // 追跡移動
     Pursuit(elapsedTime);
 
 }
 
+// 追跡移動 Playerに向かって進行する
 void EnemyNormal::Pursuit(const float& elapsedTime)
 {
     const DirectX::XMFLOAT2 playerCenterPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
