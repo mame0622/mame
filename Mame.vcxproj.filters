@@ -85,6 +85,9 @@
     <Filter Include="Mame\Ai\StateMachine">
       <UniqueIdentifier>{4612a493-6986-4fa5-8bb4-11c575040977}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Character\Enemy\NormalEnemy">
+      <UniqueIdentifier>{3120b8b6-f0ab-4cd5-bdb0-be9d5d9b4fd2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
