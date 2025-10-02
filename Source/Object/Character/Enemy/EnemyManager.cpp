@@ -25,7 +25,6 @@ void EnemyManager::Update(const float& elapsedTime)
     {
         enemies_.emplace_back(enemy);
         enemy->Initialize();
-        enemy->SetEnemyId(enemyId_++);
     }
     generates_.clear();
 
@@ -76,11 +75,11 @@ void EnemyManager::DrawDebug()
     ImGui::Text("Register Button");
     if (ImGui::Button("Normal Enemy"))
     {
-        Register(new Enemy(EnemyType::Normal));
+        Register(new Enemy(EnemyType::Normal, "NormalEnemy"));
     }
     if (ImGui::Button("Homing Enemy"))
     {
-        Register(new Enemy(EnemyType::Homing));
+        Register(new Enemy(EnemyType::Homing, "HomingEnemy"));
     }
 
     ImGui::End(); // EnemyManager
@@ -89,8 +88,8 @@ void EnemyManager::DrawDebug()
 
     for (Enemy*& enemy : enemies_)
     {
-        const std::string id = "Enemy" + std::to_string(enemy->GetEnemyId());
-        if (ImGui::TreeNodeEx(id.c_str()))
+        const std::string name = enemy->GetName() + std::to_string(enemy->GetObjectId());
+        if (ImGui::TreeNodeEx(name.c_str()))
         {
             enemy->DrawDebug();
 

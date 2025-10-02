@@ -83,7 +83,13 @@ void BulletManager::DrawDebug()
 
     ImGui::DragFloat("Angle", &angle_, 1.0f);
 
-    bullets_.at(0).DrawDebug();
+    ImGui::DragFloat("Size", &size_);
+    for (int i = 0; i < maxBullets_; ++i)
+    {
+        bullets_.at(i).GetTransform()->SetSize(size_);
+        bullets_.at(i).GetTransform()->SetTexSize(size_);
+        bullets_.at(i).GetTransform()->SetPivot(size_ * 0.5f);
+    }
 
     ImGui::End(); // BulletManager
 

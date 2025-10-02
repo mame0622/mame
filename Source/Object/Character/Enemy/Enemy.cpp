@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
-Enemy::Enemy(const EnemyManager::EnemyType& enemyType)
-    : enemyType_(enemyType)
+Enemy::Enemy(const EnemyManager::EnemyType& enemyType, const std::string& name)
+    : enemyType_(enemyType), name_(name)
 {
 }
 

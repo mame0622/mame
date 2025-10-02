@@ -24,11 +24,13 @@ private:
     const int maxBullets_ = 5;
     std::vector<Bullet> bullets_;
     
-    const DirectX::XMFLOAT2 bulletSize_ = { 100.0f, 100.0f };
+    const DirectX::XMFLOAT2 bulletSize_ = { 30.0f, 30.0f };
 
     float angle_ = 0.0f;
-    float radius_ = 120.0f;
+    float radius_ = 50.0f;
 
     std::vector<SpriteBatch> spriteBatches_;
+
+    float size_ = 30.0f;
 };
 

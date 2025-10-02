@@ -2,7 +2,7 @@
 #include "Object/Character/Player/PlayerManager.h" 
 
 EnemyNormal::EnemyNormal()
-    : Enemy(EnemyManager::EnemyType::Normal)
+    : Enemy(EnemyManager::EnemyType::Normal, "NormalEnemy")
 {
 }
 

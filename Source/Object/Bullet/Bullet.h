@@ -10,6 +10,8 @@ public:
     Bullet() {}
     ~Bullet() {}
 
+    void DrawDebug();
+
     const BulletLevel GetBulletLevel() const { return level_; }
 
 private:

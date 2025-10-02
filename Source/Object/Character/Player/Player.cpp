@@ -10,9 +10,9 @@ Player::Player()
 // ‰Šú‰»
 void Player::Initialize()
 {
-    GetTransform()->SetSize(100.0f);
-    GetTransform()->SetTexSize(100.0f);
-    GetTransform()->SetPivot(50.0f);
+    GetTransform()->SetSize(50.0f);
+    GetTransform()->SetTexSize(50.0f);
+    GetTransform()->SetPivot(25.0f);
 }
 
 // XV

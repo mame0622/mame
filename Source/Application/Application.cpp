@@ -43,6 +43,8 @@ void Application::Update(const float& elapsedTime)
 
     // ImGui
     DrawDebug();
+
+    if (input_.GetGamePad().GetButtonDown() & GamePad::BTN_UP) isImGuiActive_ = !isImGuiActive_;
 }
 
 // •`‰æ
@@ -70,6 +72,8 @@ void Application::Render()
 void Application::DrawDebug()
 {
 #if USE_IMGUI
+    if (isImGuiActive_ == false) return;
+
     ImGuiViewport* viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(viewport->WorkPos);
     ImGui::SetNextWindowSize(viewport->WorkSize);

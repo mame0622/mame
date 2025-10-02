@@ -47,5 +47,7 @@ private:
     HighResolutionTimer tictoc_;
     uint32_t            frames_ = 0;
     float               elapsedTime_ = 0.0f; // Œo‰ßŽžŠÔ
+
+    bool isImGuiActive_ = true;
 };
 
