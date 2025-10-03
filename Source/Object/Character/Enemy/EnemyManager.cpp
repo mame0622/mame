@@ -10,6 +10,7 @@ EnemyManager::EnemyManager()
     // ƒeƒNƒXƒ`ƒƒ“o˜^
     spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy0.png", 50/*Å‘å•`‰æ”*/));
     spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
 }
 
 // I—¹‰»
@@ -90,13 +91,7 @@ void EnemyManager::DrawDebug()
 
     for (Enemy*& enemy : enemies_)
     {
-        const std::string name = enemy->GetName() + std::to_string(enemy->GetObjectId());
-        if (ImGui::TreeNodeEx(name.c_str()))
-        {
-            enemy->DrawDebug();
-
-            ImGui::TreePop();
-        }
+        enemy->DrawDebug();
     }
 
     ImGui::End(); // Enemy List

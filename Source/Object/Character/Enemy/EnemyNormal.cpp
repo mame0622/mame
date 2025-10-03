@@ -3,7 +3,7 @@
 #include "ImGui/ImGuiCtrl.h"
 
 EnemyNormal::EnemyNormal()
-    : Enemy(EnemyManager::EnemyType::Normal, "NormalEnemy")
+    : Enemy(EnemyManager::EnemyType::Normal, "EnemyNormal")
 {
 }
 
