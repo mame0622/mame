@@ -25,10 +25,12 @@ void EnemyCharger::Update(const float& elapsedTime)
 
     switch (state_)
     {
-    case 0:
+    case State::Pursuit_:
+        // 追跡処理
         Pursuit(elapsedTime);
         break;
-    case 1:
+    case State::ChargeAttack_:
+        // 突進攻撃
         ChargeAttack(elapsedTime);
         break;
     }
@@ -59,10 +61,11 @@ void EnemyCharger::Pursuit(const float& elapsedTime)
 
     if (length < chargeRange_)
     {
-        state_ = 1;
+        state_ = State::ChargeAttack_;
         moveSpeed_ = 0;
         chargeTime_ = 0;
     }
+
     // 移動処理
     Move(elapsedTime);
 }
@@ -82,7 +85,7 @@ void EnemyCharger::ChargeAttack(const float& elapsedTime)
     else
     {
         // 減速
-        const float deceleration_ = 40.0f;
+        const float deceleration_ = 20.0f;
         moveSpeed_ -= deceleration_;
         
         // 前方向ベクトル算出
@@ -93,7 +96,7 @@ void EnemyCharger::ChargeAttack(const float& elapsedTime)
         if (moveSpeed_ <= 0)
         {
             moveSpeed_ = 0;
-            state_ = 0;
+            state_ = State::Pursuit_;
         }
     }
 }

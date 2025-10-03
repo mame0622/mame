@@ -25,5 +25,12 @@ private:
 
     float chargeTime_ = 0;
 
-    int state_ = 0;
+    enum class State
+    {
+        Pursuit_,
+        ChargeAttack_,
+        End_
+    };
+
+    State state_ = State::Pursuit_;
 };
