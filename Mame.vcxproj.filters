@@ -91,6 +91,24 @@
     <Filter Include="Mame\Object\Character\Enemy\EnemyCharger">
       <UniqueIdentifier>{2791c298-fd37-46fa-ad03-e82656dbea41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletLevel1">
+      <UniqueIdentifier>{016c7004-ec9d-4908-9081-156e173b2b1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletLevel2">
+      <UniqueIdentifier>{268d3ab1-8e93-4f3b-9043-be4b782ff8a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletLevel3">
+      <UniqueIdentifier>{2bb4a447-5c9b-495f-b3b9-1e307ecb0e5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletLevel4">
+      <UniqueIdentifier>{81c3ba31-136a-46c4-8745-964027e62916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletLevel5">
+      <UniqueIdentifier>{aa3fcc55-18fb-4467-9504-81639cc91bda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletOrbit">
+      <UniqueIdentifier>{66b9f834-1e2f-4faa-9fcd-b729e2cfdf7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
@@ -203,6 +221,24 @@
     </ClCompile>
     <ClCompile Include="Source\Object\Character\Enemy\EnemyCharger.cpp">
       <Filter>Mame\Object\Character\Enemy\EnemyCharger</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletLevel1\BulletLevel1.cpp">
+      <Filter>Mame\Object\Bullet\BulletLevel1</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletLevel2\BulletLevel2.cpp">
+      <Filter>Mame\Object\Bullet\BulletLevel2</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletLevel5\BulletLevel5.cpp">
+      <Filter>Mame\Object\Bullet\BulletLevel5</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletLevel4\BulletLevel4.cpp">
+      <Filter>Mame\Object\Bullet\BulletLevel4</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletLevel3\BulletLevel3.cpp">
+      <Filter>Mame\Object\Bullet\BulletLevel3</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletOrbit\BulletOrbit.cpp">
+      <Filter>Mame\Object\Bullet\BulletOrbit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +379,24 @@
     </ClInclude>
     <ClInclude Include="Source\Object\Character\Enemy\EnemyCharger.h">
       <Filter>Mame\Object\Character\Enemy\EnemyCharger</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletLevel1\BulletLevel1.h">
+      <Filter>Mame\Object\Bullet\BulletLevel1</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletLevel2\BulletLevel2.h">
+      <Filter>Mame\Object\Bullet\BulletLevel2</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletLevel5\BulletLevel5.h">
+      <Filter>Mame\Object\Bullet\BulletLevel5</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletLevel4\BulletLevel4.h">
+      <Filter>Mame\Object\Bullet\BulletLevel4</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletLevel3\BulletLevel3.h">
+      <Filter>Mame\Object\Bullet\BulletLevel3</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletOrbit\BulletOrbit.h">
+      <Filter>Mame\Object\Bullet\BulletOrbit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

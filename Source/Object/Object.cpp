@@ -2,8 +2,8 @@
 
 int Object::objectIdCount_ = 0;
 
-Object::Object()
-    : objectId_(objectIdCount_++)
+Object::Object(const std::string& name)
+    : name_(name), objectId_(objectIdCount_++)
 {
 }
 

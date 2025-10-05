@@ -3,7 +3,7 @@
 #include "ImGui/ImGuiCtrl.h"
 
 EnemyCharger::EnemyCharger()
-    :Enemy(EnemyManager::EnemyType::Charge, "EnemyCharger")
+    :Enemy("EnemyCharger", EnemyManager::EnemyType::Charger)
 {
 }
 

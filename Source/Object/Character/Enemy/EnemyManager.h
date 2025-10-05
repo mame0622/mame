@@ -11,7 +11,7 @@ public:
     enum class EnemyType : int
     {
         Normal,
-        Charge,
+        Charger,
         Homing,
         Max,
     };
@@ -36,16 +36,14 @@ public:
     void Remove(Enemy* enemy) { removes_.insert(enemy); }
     void Clear();
 
-    const int GetEnemyCount() const { return enemies_.size(); }
+    const int GetEnemyCount() const { return static_cast<int>(enemies_.size()); }
     Enemy* GetEnemy(const int& enemyIndex) { return enemies_.at(enemyIndex); }
     std::vector<Enemy*> GetEnemies() { return enemies_; }
 
 private:
     std::vector<Enemy*>         enemies_;
-    std::set<Enemy*>            removes_;
     std::set<Enemy*>            generates_;
+    std::set<Enemy*>            removes_;
     std::vector<SpriteBatch>    spriteBatches_;
-    
-    int enemyId_ = 0;
 };
 

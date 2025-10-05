@@ -7,19 +7,30 @@ public:
     enum class BulletLevel { One, Two, Three, Four, Five };
 
 public:
-    Bullet() {}
-    ~Bullet() {}
+    Bullet(const std::string& name, const BulletLevel& level = BulletLevel::One);
+    ~Bullet() override {}
 
-    void DrawDebug();
+    virtual void Update(const float& elapsedTime);
+    void DrawDebug() override;
 
     const BulletLevel GetBulletLevel() const { return level_; }
+
+    void SetBulletNumber(const int& bulletNumber) { bulletNumber_ = bulletNumber; }
+    const int GetBulletNumber() const { return bulletNumber_; }
 
     void SetCollisionRadius(const float& radius) { collisionRadius_ = radius; }
     const float GetCollisionRadius() const { return collisionRadius_; }
 
+    void SetCollisionActive(const bool& flag) { isCollisionActive_ = flag; }
+    const bool IsCollisionActive() const { return isCollisionActive_; }
+
 private:
     BulletLevel level_ = BulletLevel::One;
+    
+    // ---------- Žg—p‚µ‚Ä‚¢‚éBullet Number ----------
+    int bulletNumber_ = 0;
 
-    float collisionRadius_ = 1.0f;
+    float   collisionRadius_    = 1.0f;
+    bool    isCollisionActive_  = true;
 };
 
