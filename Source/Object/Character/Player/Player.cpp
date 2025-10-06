@@ -1,15 +1,20 @@
 #include "Player.h"
 #include "ImGui/ImGuiCtrl.h"
 #include "Input/Input.h"
+#include "Object/Bullet/BulletManager.h"
+#include "Graphics/Graphics.h"
 
 Player::Player()
-    : spriteBatch_(L"./Resources/Image/Player/Player.png", 1)
+    : Character("Player"), 
+    spriteBatch_(L"./Resources/Image/Player/Player.png", 1)
 {
 }
 
 // 初期化
 void Player::Initialize()
 {
+    GetTransform()->SetPosition(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f);
+
     GetTransform()->SetSize(50.0f);
     GetTransform()->SetTexSize(50.0f);
     GetTransform()->SetPivot(25.0f);
@@ -20,18 +25,25 @@ void Player::Initialize()
 // 更新
 void Player::Update(const float& elapsedTime)
 {
-
     // 移動処理
     const float aLx = Input::Instance().GetGamePad().GetAxisLx();
     const float aLy = Input::Instance().GetGamePad().GetAxisLy();
-    const DirectX::XMFLOAT2 moveVec = XMFloat2Normalize({ aLx, -aLy });
-    GetTransform()->AddPositionX(moveSpeed_ * moveVec.x * elapsedTime);
-    GetTransform()->AddPositionY(moveSpeed_ * moveVec.y * elapsedTime);
+    const DirectX::XMFLOAT2 moveDirection = XMFloat2Normalize({ aLx, -aLy });
+    GetTransform()->AddPositionX(moveDirection.x * moveSpeed_ * elapsedTime);
+    GetTransform()->AddPositionY(moveDirection.y * moveSpeed_ * elapsedTime);
 
     // 旋回処理
-    if(moveVec.x != 0.0f || moveVec.y != 0.0f)
+    if(moveDirection.x != 0.0f || moveDirection.y != 0.0f)
     {
-        GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveVec.y, moveVec.x) + DirectX::XM_PIDIV2));
+        GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveDirection.y, moveDirection.x) + DirectX::XM_PIDIV2));
+
+        moveDirection_ = moveDirection; // 保存する
+    }
+
+    // 弾発射 Aボタン Space
+    if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_A)
+    {
+        BulletManager::Instance().Launch();
     }
 }
 
@@ -47,7 +59,7 @@ void Player::Render()
 void Player::DrawDebug()
 {
 #if USE_IMGUI
-    ImGui::Begin("Player");
+    ImGui::Begin(GetName().c_str());
 
     Object::DrawDebug();
     Character::DrawDebug();

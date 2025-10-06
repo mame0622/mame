@@ -35,10 +35,12 @@ void CollisionManager::Update()
 
     // ----- Bullet Vs Enemy -----
     // -----  PushCollider   -----
-    std::vector<Bullet> bullets = BulletManager::Instance().GetBullets();
-    const int maxBulletCount = BulletManager::Instance().GetBulletCount();
+    std::vector<BulletOrbit> bullets = BulletManager::Instance().GetOrvitBullets();
+    const int maxBulletCount = BulletManager::Instance().GetOrvitBulletCount();
     for (int bulletIndex = 0; bulletIndex < maxBulletCount; ++bulletIndex)
     {
+        if (bullets.at(bulletIndex).IsCollisionActive() == false) continue;
+
         for (int enemyIndex = 0; enemyIndex < maxEnemyCount; ++enemyIndex)
         {
             DirectX::XMFLOAT2 resultPosition = {};

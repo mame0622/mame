@@ -4,18 +4,19 @@
 class Object
 {
 public:
-    Object();
+    Object(const std::string& name);
     virtual ~Object() {}
 
     virtual void DrawDebug(); // ImGui
 
     Transform2D* GetTransform() { return &transform_; }
-
+    const std::string GetName() const { return name_; }
     const int GetObjectId() const { return objectId_; }
 
 private:
-    Transform2D transform_;
-    const int   objectId_ = 0;    
-    static int  objectIdCount_;
+    Transform2D         transform_;
+    const std::string   name_;
+    const int           objectId_   = 0;    
+    static int          objectIdCount_;
 };
 

@@ -13,9 +13,13 @@ public:
     void Render();
     void DrawDebug() override;
 
+    const DirectX::XMFLOAT2 GetMoveDirection() const { return moveDirection_; }
+
 private:
     SpriteBatch spriteBatch_;
 
-    float moveSpeed_ = 500.0f;
+    // ---------- Move ----------
+    DirectX::XMFLOAT2   moveDirection_ = { 0.0f, -1.0f };
+    float               moveSpeed_      = 500.0f;
 };
 

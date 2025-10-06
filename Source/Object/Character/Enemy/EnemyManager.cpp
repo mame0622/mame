@@ -16,7 +16,6 @@ EnemyManager::EnemyManager()
 // 終了化
 void EnemyManager::Finalize()
 {
-    enemyId_ = 0; // リセット
     Clear();
 }
 

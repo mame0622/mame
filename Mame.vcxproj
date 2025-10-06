@@ -41,7 +41,13 @@
     <ClCompile Include="Source\Input\Mouse.cpp" />
     <ClCompile Include="Source\Math\Transform.cpp" />
     <ClCompile Include="Source\Object\Bullet\Bullet.cpp" />
+    <ClCompile Include="Source\Object\Bullet\BulletLevel1\BulletLevel1.cpp" />
+    <ClCompile Include="Source\Object\Bullet\BulletLevel2\BulletLevel2.cpp" />
+    <ClCompile Include="Source\Object\Bullet\BulletLevel3\BulletLevel3.cpp" />
+    <ClCompile Include="Source\Object\Bullet\BulletLevel4\BulletLevel4.cpp" />
+    <ClCompile Include="Source\Object\Bullet\BulletLevel5\BulletLevel5.cpp" />
     <ClCompile Include="Source\Object\Bullet\BulletManager.cpp" />
+    <ClCompile Include="Source\Object\Bullet\BulletOrbit\BulletOrbit.cpp" />
     <ClCompile Include="Source\Object\Character\Character.cpp" />
     <ClCompile Include="Source\Object\Character\Enemy\Enemy.cpp" />
     <ClCompile Include="Source\Object\Character\Enemy\EnemyCharger\EnemyCharger.cpp" />
@@ -89,7 +95,13 @@
     <ClInclude Include="Source\Math\MathHelperFloat2.h" />
     <ClInclude Include="Source\Math\Transform.h" />
     <ClInclude Include="Source\Object\Bullet\Bullet.h" />
+    <ClInclude Include="Source\Object\Bullet\BulletLevel1\BulletLevel1.h" />
+    <ClInclude Include="Source\Object\Bullet\BulletLevel2\BulletLevel2.h" />
+    <ClInclude Include="Source\Object\Bullet\BulletLevel3\BulletLevel3.h" />
+    <ClInclude Include="Source\Object\Bullet\BulletLevel4\BulletLevel4.h" />
+    <ClInclude Include="Source\Object\Bullet\BulletLevel5\BulletLevel5.h" />
     <ClInclude Include="Source\Object\Bullet\BulletManager.h" />
+    <ClInclude Include="Source\Object\Bullet\BulletOrbit\BulletOrbit.h" />
     <ClInclude Include="Source\Object\Character\Character.h" />
     <ClInclude Include="Source\Object\Character\Enemy\Enemy.h" />
     <ClInclude Include="Source\Object\Character\Enemy\EnemyCharger\EnemyCharger.h" />

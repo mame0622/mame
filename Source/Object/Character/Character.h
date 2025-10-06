@@ -4,7 +4,7 @@
 class Character : public Object
 {
 public:
-    Character() {}
+    Character(const std::string& name);
     ~Character() override {}
 
     void DrawDebug();
