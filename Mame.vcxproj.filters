@@ -91,6 +91,9 @@
     <Filter Include="Mame\Object\Character\Enemy\EnemyCharger">
       <UniqueIdentifier>{2791c298-fd37-46fa-ad03-e82656dbea41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Character\Enemy\EnemyPlanaria">
+      <UniqueIdentifier>{915d1c22-2623-44ad-b77a-e93fa3fdccde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
@@ -195,14 +198,17 @@
     <ClCompile Include="Source\Object\Bullet\BulletManager.cpp">
       <Filter>Mame\Object\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Object\Character\Enemy\EnemyNormal.cpp">
-      <Filter>Mame\Object\Character\Enemy\EnemyNormal</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Collision\CollisionManager.cpp">
       <Filter>Mame\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Object\Character\Enemy\EnemyCharger.cpp">
+    <ClCompile Include="Source\Object\Character\Enemy\EnemyCharger\EnemyCharger.cpp">
       <Filter>Mame\Object\Character\Enemy\EnemyCharger</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Character\Enemy\EnemyNormal\EnemyNormal.cpp">
+      <Filter>Mame\Object\Character\Enemy\EnemyNormal</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Character\Enemy\EnemyPlanaria\EnemyPlanaria.cpp">
+      <Filter>Mame\Object\Character\Enemy\EnemyPlanaria</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,14 +341,17 @@
     <ClInclude Include="Source\Ai\StateMachine\StateMachine.h">
       <Filter>Mame\Ai\StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Object\Character\Enemy\EnemyNormal.h">
-      <Filter>Mame\Object\Character\Enemy\EnemyNormal</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Collision\CollisionManager.h">
       <Filter>Mame\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Object\Character\Enemy\EnemyCharger.h">
+    <ClInclude Include="Source\Object\Character\Enemy\EnemyCharger\EnemyCharger.h">
       <Filter>Mame\Object\Character\Enemy\EnemyCharger</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Character\Enemy\EnemyNormal\EnemyNormal.h">
+      <Filter>Mame\Object\Character\Enemy\EnemyNormal</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Character\Enemy\EnemyPlanaria\EnemyPlanaria.h">
+      <Filter>Mame\Object\Character\Enemy\EnemyPlanaria</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

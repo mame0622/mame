@@ -7,6 +7,7 @@ EnemyCharger::EnemyCharger()
 {
 }
 
+// 初期化
 void EnemyCharger::Initialize()
 {
     const float size_ = 50.0f;
@@ -17,8 +18,10 @@ void EnemyCharger::Initialize()
     SetCollisionRadius(25.0f);
 }
 
+// 更新処理
 void EnemyCharger::Update(const float& elapsedTime)
 {
+    // 進行方向ベクトル算出
     const DirectX::XMFLOAT2 playerCenterPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
     const DirectX::XMFLOAT2 enemyCenterPosition = GetTransform()->GetCenterPosition();
     moveVec_ = playerCenterPosition - enemyCenterPosition;
@@ -35,7 +38,7 @@ void EnemyCharger::Update(const float& elapsedTime)
         break;
     }
 }
-
+// ImGui
 void EnemyCharger::DrawDebug()
 {
     const std::string name = GetName() + std::to_string(GetObjectId());
@@ -48,6 +51,7 @@ void EnemyCharger::DrawDebug()
     }
 }
 
+// 追跡処理
 void EnemyCharger::Pursuit(const float& elapsedTime)
 {
     moveSpeed_ = 200.0f;
@@ -59,17 +63,19 @@ void EnemyCharger::Pursuit(const float& elapsedTime)
     // 突進攻撃に切り替わる範囲
     const float chargeRange_ = 300.0f;
 
+    //ステート更新
     if (length < chargeRange_)
     {
-        state_ = State::ChargeAttack_;
         moveSpeed_ = 0;
         chargeTime_ = 0;
+        state_ = State::ChargeAttack_;
     }
 
     // 移動処理
     Move(elapsedTime);
 }
 
+// 突進処理
 void EnemyCharger::ChargeAttack(const float& elapsedTime)
 {
     // 突進準備開始
@@ -93,6 +99,7 @@ void EnemyCharger::ChargeAttack(const float& elapsedTime)
         const DirectX::XMFLOAT2 forward = { sinf(angleRadians),-cosf(angleRadians) };
         GetTransform()->AddPosition(forward * moveSpeed_ * elapsedTime);
 
+        // ステート更新
         if (moveSpeed_ <= 0)
         {
             moveSpeed_ = 0;
