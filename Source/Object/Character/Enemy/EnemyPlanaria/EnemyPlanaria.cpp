@@ -1,7 +1,7 @@
 #include "EnemyPlanaria.h"
 
 EnemyPlanaria::EnemyPlanaria()
-    :Enemy(EnemyManager::EnemyType::Charge, "EnemyCharger")
+    :Enemy("EnemyPlanaria", EnemyManager::EnemyType::Charger)
 {
 }
 

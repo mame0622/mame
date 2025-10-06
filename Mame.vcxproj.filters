@@ -94,6 +94,24 @@
     <Filter Include="Mame\Object\Character\Enemy\EnemyPlanaria">
       <UniqueIdentifier>{915d1c22-2623-44ad-b77a-e93fa3fdccde}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletLevel1">
+      <UniqueIdentifier>{e38fc09f-7879-41ee-b7d1-483c52be54a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletLevel2">
+      <UniqueIdentifier>{0f36e8cd-7627-4308-878c-10568615c49a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletLevel3">
+      <UniqueIdentifier>{3f46378f-c22b-4e44-9441-c5843507abe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletLevel4">
+      <UniqueIdentifier>{efda3f11-71fc-4634-9b6f-cbb2e7ae00fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletLevel5">
+      <UniqueIdentifier>{c221e1c1-460f-4150-be99-645c3f6fa282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletOrbit">
+      <UniqueIdentifier>{95818fdb-cc12-4534-87aa-c95f689dec46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
@@ -209,6 +227,24 @@
     </ClCompile>
     <ClCompile Include="Source\Object\Character\Enemy\EnemyPlanaria\EnemyPlanaria.cpp">
       <Filter>Mame\Object\Character\Enemy\EnemyPlanaria</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletLevel1\BulletLevel1.cpp">
+      <Filter>Mame\Object\Bullet\BulletLevel1</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletLevel2\BulletLevel2.cpp">
+      <Filter>Mame\Object\Bullet\BulletLevel2</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletLevel3\BulletLevel3.cpp">
+      <Filter>Mame\Object\Bullet\BulletLevel3</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletLevel4\BulletLevel4.cpp">
+      <Filter>Mame\Object\Bullet\BulletLevel4</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletLevel5\BulletLevel5.cpp">
+      <Filter>Mame\Object\Bullet\BulletLevel5</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletOrbit\BulletOrbit.cpp">
+      <Filter>Mame\Object\Bullet\BulletOrbit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +388,24 @@
     </ClInclude>
     <ClInclude Include="Source\Object\Character\Enemy\EnemyPlanaria\EnemyPlanaria.h">
       <Filter>Mame\Object\Character\Enemy\EnemyPlanaria</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletLevel1\BulletLevel1.h">
+      <Filter>Mame\Object\Bullet\BulletLevel1</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletLevel2\BulletLevel2.h">
+      <Filter>Mame\Object\Bullet\BulletLevel2</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletLevel3\BulletLevel3.h">
+      <Filter>Mame\Object\Bullet\BulletLevel3</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletLevel4\BulletLevel4.h">
+      <Filter>Mame\Object\Bullet\BulletLevel4</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletLevel5\BulletLevel5.h">
+      <Filter>Mame\Object\Bullet\BulletLevel5</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletOrbit\BulletOrbit.h">
+      <Filter>Mame\Object\Bullet\BulletOrbit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
