@@ -13,10 +13,12 @@ public:
 
 private:
     void Pursuit(const float& elapsedTime);
+    void UndeadGeneration();
 
 private:
+    DirectX::XMFLOAT2 moveVec_ = {};
     float moveSpeed_ = 300.0f;
 
-    
+    float generationTime_ = 0;
 
 };

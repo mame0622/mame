@@ -1,5 +1,6 @@
 #include "EnemyNecromancer.h"
 #include "Object/Character/Player/PlayerManager.h"
+#include "Object/Character/Enemy/EnemyNormal/EnemyNormal.h"
 
 EnemyNecromancer::EnemyNecromancer()
     :Enemy("EnemyNecromancer", EnemyManager::EnemyType::Necromancer)
@@ -19,10 +20,16 @@ void EnemyNecromancer::Initialize()
 
 void EnemyNecromancer::Update(const float& elapsedTime)
 {
-    float generationTime +=
+    // 進行方向ベクトル算出
+    const DirectX::XMFLOAT2 playerCenterPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
+    const DirectX::XMFLOAT2 enemyCenterPosition = GetTransform()->GetCenterPosition();
+    moveVec_ = playerCenterPosition - enemyCenterPosition;
 
+    generationTime_ += elapsedTime;
 
     Pursuit(elapsedTime);
+
+    
 }
 
 void EnemyNecromancer::DrawDebug()
@@ -33,10 +40,25 @@ void EnemyNecromancer::DrawDebug()
 // 追跡処理
 void EnemyNecromancer::Pursuit(const float& elapsedTime)
 {
-    const DirectX::XMFLOAT2 playerCenterPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
-    const DirectX::XMFLOAT2 enemyCenterPosition = GetTransform()->GetCenterPosition();
-    const DirectX::XMFLOAT2 moveVec = XMFloat2Normalize(playerCenterPosition - enemyCenterPosition);
+    const DirectX::XMFLOAT2 moveDirection = XMFloat2Normalize(moveVec_);
 
-    GetTransform()->AddPosition(moveVec * moveSpeed_ * elapsedTime);
-    GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveVec.y, moveVec.x) + DirectX::XM_PIDIV2));
+    GetTransform()->AddPosition(moveDirection * moveSpeed_ * elapsedTime);
+    GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveDirection.y, moveDirection.x) + DirectX::XM_PIDIV2));
+}
+
+void EnemyNecromancer::UndeadGeneration()
+{
+    // 生成する敵の数
+    const int undead = 4;
+
+    for (int i = 0; i < undead; i++)
+    {
+        EnemyNormal* enemy = new EnemyNormal();
+        // 生成位置設定
+        enemy->GetTransform()->SetPositionX(GetTransform()->GetPosition().x);
+        enemy->GetTransform()->SetPositionY(GetTransform()->GetPosition().y);
+
+        // 登録
+        EnemyManager::Instance().Register(enemy);
+    }
 }

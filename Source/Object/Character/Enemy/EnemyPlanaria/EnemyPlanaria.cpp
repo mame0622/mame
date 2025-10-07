@@ -11,10 +11,10 @@ EnemyPlanaria::EnemyPlanaria()
 // ‰Šú‰»
 void EnemyPlanaria::Initialize()
 {
-    const float size_ = 100.0f;
-    GetTransform()->SetSize(size_);
-    GetTransform()->SetTexSize(size_);
-    GetTransform()->SetPivot(size_ * 0.5f);
+    const float size = 100.0f;
+    GetTransform()->SetSize(size);
+    GetTransform()->SetTexSize(size);
+    GetTransform()->SetPivot(size * 0.5f);
 
     SetCollisionRadius(50.0f);
 }
@@ -31,7 +31,7 @@ void EnemyPlanaria::Update(const float& elapsedTime)
         // •ª—ô‘Ì‚Ì”
         const int numberOfSplits = 3;
 
-        for (int i = 0; i < numberOfSplits; i++)
+        for (int i = 0; i < numberOfSplits; ++i)
         {
             EnemyNormal* enemy = new EnemyNormal();
             // ¶¬ˆÊ’uİ’è

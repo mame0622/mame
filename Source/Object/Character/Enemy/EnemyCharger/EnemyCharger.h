@@ -27,10 +27,10 @@ private:
 
     enum class State
     {
-        Pursuit_,
-        ChargeAttack_,
-        End_
+        Pursuit,
+        ChargeAttack,
+        End
     };
 
-    State state_ = State::Pursuit_;
+    State state_ = State::Pursuit;
 };

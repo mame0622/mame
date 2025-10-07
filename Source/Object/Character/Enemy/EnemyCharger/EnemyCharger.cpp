@@ -10,10 +10,10 @@ EnemyCharger::EnemyCharger()
 // 初期化
 void EnemyCharger::Initialize()
 {
-    const float size_ = 50.0f;
-    GetTransform()->SetSize(size_);
-    GetTransform()->SetTexSize(size_);
-    GetTransform()->SetPivot(size_ * 0.5f);
+    const float size = 50.0f;
+    GetTransform()->SetSize(size);
+    GetTransform()->SetTexSize(size);
+    GetTransform()->SetPivot(size * 0.5f);
 
     SetCollisionRadius(25.0f);
 }
@@ -28,11 +28,11 @@ void EnemyCharger::Update(const float& elapsedTime)
 
     switch (state_)
     {
-    case State::Pursuit_:
+    case State::Pursuit:
         // 追跡処理
         Pursuit(elapsedTime);
         break;
-    case State::ChargeAttack_:
+    case State::ChargeAttack:
         // 突進攻撃
         ChargeAttack(elapsedTime);
         break;
@@ -61,14 +61,14 @@ void EnemyCharger::Pursuit(const float& elapsedTime)
     const float length = XMFloat2Length(moveVec_);
 
     // 突進攻撃に切り替わる範囲
-    const float chargeRange_ = 300.0f;
+    const float chargeRange = 300.0f;
 
     //ステート更新
-    if (length < chargeRange_)
+    if (length < chargeRange)
     {
         moveSpeed_ = 0;
         chargeTime_ = 0;
-        state_ = State::ChargeAttack_;
+        state_ = State::ChargeAttack;
     }
 
     // 移動処理
@@ -91,8 +91,8 @@ void EnemyCharger::ChargeAttack(const float& elapsedTime)
     else
     {
         // 減速
-        const float deceleration_ = 20.0f;
-        moveSpeed_ -= deceleration_;
+        const float deceleration = 20.0f;
+        moveSpeed_ -= deceleration;
         
         // 前方向ベクトル算出
         const float angleRadians = DirectX::XMConvertToRadians(GetTransform()->GetAngle());
@@ -103,7 +103,7 @@ void EnemyCharger::ChargeAttack(const float& elapsedTime)
         if (moveSpeed_ <= 0)
         {
             moveSpeed_ = 0;
-            state_ = State::Pursuit_;
+            state_ = State::Pursuit;
         }
     }
 }
