@@ -1,11 +1,11 @@
 #pragma once
 #include "Object/Character/Enemy/Enemy.h"
 
-class EnemyPlanaria : public Enemy
+class EnemyNecromancer : public Enemy
 {
 public:
-    EnemyPlanaria();
-    ~EnemyPlanaria(){}
+    EnemyNecromancer();
+    ~EnemyNecromancer(){}
 
     void Initialize() override;
     void Update(const float& elapsedTime) override;
@@ -16,4 +16,7 @@ private:
 
 private:
     float moveSpeed_ = 300.0f;
+
+    
+
 };

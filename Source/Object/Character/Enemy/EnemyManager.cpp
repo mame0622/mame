@@ -1,7 +1,9 @@
 #include "EnemyManager.h"
 #include "Enemy.h"
-#include "EnemyNormal.h"
-#include "EnemyCharger.h"
+#include "Object/Character/Enemy/EnemyNormal/EnemyNormal.h"
+#include "Object/Character/Enemy/EnemyCharger/EnemyCharger.h"
+#include "Object/Character/Enemy/EnemyPlanaria/EnemyPlanaria.h"
+#include "Object/Character/Enemy/EnemyNecromancer/EnemyNecromancer.h"
 #include "Application/Common.h"
 #include "ImGui/ImGuiCtrl.h"
 
@@ -54,16 +56,16 @@ void EnemyManager::Render()
     // テクスチャの種類ごとに描画する
     for (int i = 0; i < static_cast<int>(EnemyType::Max); ++i)
     {
-        std::vector<Transform2D> transforms_;
+        std::vector<Transform2D> transforms;
         for (Enemy*& enemy : enemies_)
         {
             if (enemy->GetEnemyType() == static_cast<EnemyType>(i))
             {
-                transforms_.emplace_back(*enemy->GetTransform());
+                transforms.emplace_back(*enemy->GetTransform());
             }
         }
 
-        spriteBatches_.at(i).Render(transforms_);
+        spriteBatches_.at(i).Render(transforms);
     }
 }
 
@@ -83,6 +85,15 @@ void EnemyManager::DrawDebug()
     {
         Register(new EnemyCharger());
     }
+    if (ImGui::Button("Planaria Enemy"))
+    {
+        Register(new EnemyPlanaria());
+    }
+    if (ImGui::Button("Necromancer Enemy"))
+    {
+        Register(new EnemyNecromancer());
+    }
+
 
     ImGui::End(); // EnemyManager
 

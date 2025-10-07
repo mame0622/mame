@@ -12,7 +12,8 @@ public:
     {
         Normal,
         Charger,
-        Homing,
+        Planaria,
+        Necromancer,
         Max,
     };
 

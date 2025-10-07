@@ -112,6 +112,9 @@
     <Filter Include="Mame\Object\Bullet\BulletOrbit">
       <UniqueIdentifier>{95818fdb-cc12-4534-87aa-c95f689dec46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Character\Enemy\EnemyNecromancer">
+      <UniqueIdentifier>{0da22c69-e3b4-4c1b-9005-4f272b3fa135}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
@@ -245,6 +248,9 @@
     </ClCompile>
     <ClCompile Include="Source\Object\Bullet\BulletOrbit\BulletOrbit.cpp">
       <Filter>Mame\Object\Bullet\BulletOrbit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Character\Enemy\EnemyNecromancer\EnemyNecromancer.cpp">
+      <Filter>Mame\Object\Character\Enemy\EnemyNecromancer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -406,6 +412,9 @@
     </ClInclude>
     <ClInclude Include="Source\Object\Bullet\BulletOrbit\BulletOrbit.h">
       <Filter>Mame\Object\Bullet\BulletOrbit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Character\Enemy\EnemyNecromancer\EnemyNecromancer.h">
+      <Filter>Mame\Object\Character\Enemy\EnemyNecromancer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
