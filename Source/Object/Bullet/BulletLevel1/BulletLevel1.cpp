@@ -4,7 +4,8 @@
 #include "Object/Character/Player/PlayerManager.h"
 
 BulletLevel1::BulletLevel1()
-    : Bullet("BulletLevel1", BulletLevel::One)
+    : Bullet("BulletLevel1", BulletLevel::One,
+        Collision::Type::Bullet, this, 25.0f)
 {
     // マネージャーに登録
     BulletManager::Instance().Register(this);
@@ -55,4 +56,18 @@ void BulletLevel1::DrawDebug()
     }
 
 #endif // USE_IMGUI
+}
+
+// 衝突検知
+void BulletLevel1::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
+{
+    if (type == Collision::Type::Enemy)
+    {
+        BulletManager::Instance().GetOrbitBullet(GetBulletNumber())->SetLevel(BulletLevel::Two);
+        BulletManager::Instance().GetOrbitBullet(GetBulletNumber())->SetCollisionActive(true);
+
+        // 分からん
+        Remove();
+        BulletManager::Instance().Remove(this);
+    }
 }

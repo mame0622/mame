@@ -1,5 +1,6 @@
 #pragma once
 #include "Math/Transform.h"
+#include "Collision/Collision.h"
 
 class Object
 {
@@ -8,6 +9,8 @@ public:
     virtual ~Object() {}
 
     virtual void DrawDebug(); // ImGui
+
+    virtual void OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position) = 0;
 
     Transform2D* GetTransform() { return &transform_; }
     const std::string GetName() const { return name_; }

@@ -1,7 +1,8 @@
 #include "BulletOrbit.h"
 
 BulletOrbit::BulletOrbit()
-    : Bullet("BulletOrbit")
+    : Bullet("BulletOrbit", BulletLevel::One,
+        Collision::Type::BulletOrbit, this, 30.0f)
 {
 }
 
@@ -24,5 +25,10 @@ void BulletOrbit::Update(const float& elapsedTime)
 
 // ImGui
 void BulletOrbit::DrawDebug()
+{
+}
+
+// è’ìÀåüím
+void BulletOrbit::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
 {
 }

@@ -11,6 +11,8 @@ public:
     void Update(const float& elapsedTime) override;
     void DrawDebug() override;
 
+    void OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position) override;
+
 private:
     void Pursuit(const float& elapsedTime);
     void UndeadGeneration();

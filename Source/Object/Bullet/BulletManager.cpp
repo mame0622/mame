@@ -11,8 +11,8 @@ BulletManager::BulletManager()
     // プレイヤーの周りを回るBullet生成
     for (int orbitBullet = 0; orbitBullet < maxOrvitBullets_; ++orbitBullet)
     {
-        BulletOrbit bulletOrbit;
-        bulletOrbit.Initialize(bulletSize_);
+        BulletOrbit* bulletOrbit = new BulletOrbit();
+        bulletOrbit->Initialize(bulletSize_);
         orvitBullets_.emplace_back(bulletOrbit);
     }
 
@@ -62,11 +62,11 @@ void BulletManager::Render()
     for (int i = 0; i < maxBulletLevel; ++i)
     {
         std::vector<Transform2D> transforms_;
-        for (Bullet& orvitBullet : orvitBullets_)
+        for (BulletOrbit*& orvitBullet : orvitBullets_)
         {
-            if (orvitBullet.GetBulletLevel() == static_cast<Bullet::BulletLevel>(i))
+            if (orvitBullet->GetBulletLevel() == static_cast<Bullet::BulletLevel>(i))
             {                
-                transforms_.emplace_back(*orvitBullet.GetTransform());
+                transforms_.emplace_back(*orvitBullet->GetTransform());
             }
         }
 
@@ -112,9 +112,9 @@ void BulletManager::DrawDebug()
 
     ImGui::Begin("OrvitBullet List");
 
-    for (Bullet& bullet : orvitBullets_)
+    for (BulletOrbit*& bullet : orvitBullets_)
     {
-        bullet.DrawDebug();
+        bullet->DrawDebug();
     }
 
     ImGui::End(); // OrvitBullet List
@@ -125,17 +125,43 @@ void BulletManager::DrawDebug()
 // 発射
 void BulletManager::Launch()
 {
+    // 弾のアクティブリストを作成
+    const bool activeBulletList[maxOrvitBullets_] =
+    {
+        orvitBullets_.at(0)->IsCollisionActive(),
+        orvitBullets_.at(1)->IsCollisionActive(),
+        orvitBullets_.at(2)->IsCollisionActive(),
+        orvitBullets_.at(3)->IsCollisionActive(),
+        orvitBullets_.at(4)->IsCollisionActive(),
+    };
+
     // 発射できる弾があるか確認
     bool isReadyToFire = false;
-    for (BulletOrbit& orvitBullet : orvitBullets_)
+    for (int bulletIndex = 0; bulletIndex < maxOrvitBullets_; ++bulletIndex)
     {
-        if (orvitBullet.IsCollisionActive()) isReadyToFire = true;
+        if (activeBulletList[bulletIndex]) isReadyToFire = true;
     }
     if (isReadyToFire == false) return;
 
-    // 順番に発射
-    const Bullet::BulletLevel level = orvitBullets_.at(launchIndex_).GetBulletLevel();
+    // ---------- Index順に発射 ----------
+    // 発射番号を決定する
+    while (true)
+    {
+        // 発射可能個体を探す
+        if (activeBulletList[launchIndex_] == false)
+        {
+            // リスト番号を次に進める
+            ++launchIndex_;
+            if (launchIndex_ >= maxOrvitBullets_) launchIndex_ = 0;
+        }
+        else
+        {
+            // 発射可能個体 発見
+            break;
+        }
+    }
 
+    const Bullet::BulletLevel level = orvitBullets_.at(launchIndex_)->GetBulletLevel();
     const DirectX::XMFLOAT2 direction = PlayerManager::Instance().GetPlayer()->GetMoveDirection();
     
     switch (level)
@@ -145,7 +171,7 @@ void BulletManager::Launch()
         BulletLevel1* level1 = new BulletLevel1();
         level1->Initialize(launchIndex_, bulletSize_, orvitRadius_, direction);
 
-        orvitBullets_.at(launchIndex_).SetCollisionActive(false);
+        orvitBullets_.at(launchIndex_)->SetCollisionActive(false);
     }
         break;
     case Bullet::BulletLevel::Two:
@@ -176,9 +202,9 @@ void BulletManager::Clear()
 // Playerの周りに配置するBullet更新
 void BulletManager::UpdateOrvitBullets(const float& elapsedTime)
 {
-    for (Bullet& orvitBullet : orvitBullets_)
+    for (BulletOrbit*& orvitBullet : orvitBullets_)
     {
-        orvitBullet.Update(elapsedTime);
+        orvitBullet->Update(elapsedTime);
     }
 
     // Playerの画像の中心をTargetに設定する
@@ -190,20 +216,20 @@ void BulletManager::UpdateOrvitBullets(const float& elapsedTime)
         float angle = orvitAngle_ + (2.0f * DirectX::XM_PI / maxOrvitBullets_) * i;
 
         // Bulletの画像の中心を指定された位置に持っていく為のOffset
-        const DirectX::XMFLOAT2 orvitBulletOffset = orvitBullets_.at(i).GetTransform()->GetSize() * 0.5f;
+        const DirectX::XMFLOAT2 orvitBulletOffset = orvitBullets_.at(i)->GetTransform()->GetSize() * 0.5f;
 
-        orvitBullets_.at(i).GetTransform()->SetPositionX(playerCenterPosition.x + orvitRadius_ * cosf(angle) - orvitBulletOffset.x);
-        orvitBullets_.at(i).GetTransform()->SetPositionY(playerCenterPosition.y + orvitRadius_ * sinf(angle) - orvitBulletOffset.y);
+        orvitBullets_.at(i)->GetTransform()->SetPositionX(playerCenterPosition.x + orvitRadius_ * cosf(angle) - orvitBulletOffset.x);
+        orvitBullets_.at(i)->GetTransform()->SetPositionY(playerCenterPosition.y + orvitRadius_ * sinf(angle) - orvitBulletOffset.y);
     }
 
     // Targetに対して辺が向くようにする
     for (int i = 0; i < maxOrvitBullets_; ++i)
     {
-        const DirectX::XMFLOAT2 orvitBulletCenterPosition = orvitBullets_.at(i).GetTransform()->GetCenterPosition();
+        const DirectX::XMFLOAT2 orvitBulletCenterPosition = orvitBullets_.at(i)->GetTransform()->GetCenterPosition();
 
         const DirectX::XMFLOAT2 direction = XMFloat2Normalize(orvitBulletCenterPosition - playerCenterPosition);
 
-        orvitBullets_.at(i).GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(direction.y, direction.x) + DirectX::XM_PIDIV2));
+        orvitBullets_.at(i)->GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(direction.y, direction.x) + DirectX::XM_PIDIV2));
     }
 
     orvitAngle_ += elapsedTime;

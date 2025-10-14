@@ -3,7 +3,8 @@
 #include "Object/Character/Enemy/EnemyNormal/EnemyNormal.h"
 
 EnemyNecromancer::EnemyNecromancer()
-    :Enemy("EnemyNecromancer", EnemyManager::EnemyType::Necromancer)
+    :Enemy("EnemyNecromancer", EnemyManager::EnemyType::Necromancer,
+        Collision::Type::Enemy, this, 25.0f)
 {
 
 }
@@ -35,6 +36,11 @@ void EnemyNecromancer::Update(const float& elapsedTime)
 void EnemyNecromancer::DrawDebug()
 {
 
+}
+
+// Õ“ËŒŸ’m
+void EnemyNecromancer::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
+{
 }
 
 // ’ÇÕˆ—

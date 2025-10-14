@@ -6,7 +6,8 @@
 
 Player::Player()
     : Character("Player"), 
-    spriteBatch_(L"./Resources/Image/Player/Player.png", 1)
+    spriteBatch_(L"./Resources/Image/Player/Player.png", 1),
+    collision_(new Collision(Collision::Type::Player, this, 25.0f))
 {
 }
 
@@ -45,6 +46,17 @@ void Player::Update(const float& elapsedTime)
     {
         BulletManager::Instance().Launch();
     }
+
+    // ï«(âÊñ äO)îªíË
+    DirectX::XMFLOAT2 position = GetTransform()->GetPosition();
+    const DirectX::XMFLOAT2 size = GetTransform()->GetSize();
+    const DirectX::XMFLOAT2 collisionWidth = { position.x - collisionOffset_.x, position.x + size.x + collisionOffset_.x};
+    const DirectX::XMFLOAT2 collisionHeight = { position.y - collisionOffset_.y, position.y + size.y + collisionOffset_.y };
+    if (collisionWidth.x <= 0.0f) position.x = collisionOffset_.x;
+    if (collisionWidth.y >= SCREEN_WIDTH) position.x = SCREEN_WIDTH - size.x - collisionOffset_.x;
+    if (collisionHeight.x <= 0.0f) position.y = collisionOffset_.y;
+    if (collisionHeight.y >= SCREEN_HEIGHT) position.y = SCREEN_HEIGHT - size.y - collisionOffset_.y;
+    GetTransform()->SetPosition(position);
 }
 
 // ï`âÊ
@@ -61,9 +73,19 @@ void Player::DrawDebug()
 #if USE_IMGUI
     ImGui::Begin(GetName().c_str());
 
+    ImGui::DragFloat2("CollisionOffset", &collisionOffset_.x);
+
     Object::DrawDebug();
     Character::DrawDebug();
 
     ImGui::End();
 #endif
+}
+
+// è’ìÀåüím
+void Player::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
+{
+
+    // âº:éÄñSÇµÇΩÇËÇµÇƒÅAObjectÇ™è¡Ç¶ãéÇÈÇ∆Ç´Ç…ìñÇΩÇËîªíËÇ‡è¡Ç∑
+    //collision_.Remove();
 }

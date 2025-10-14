@@ -1,15 +1,19 @@
 #include "EnemyNormal.h"
 #include "Object/Character/Player/PlayerManager.h" 
 #include "ImGui/ImGuiCtrl.h"
+#include "Collision/CollisionManager.h"
 
 EnemyNormal::EnemyNormal()
-    : Enemy("EnemyNormal", EnemyManager::EnemyType::Normal)
+    : Enemy("EnemyNormal", EnemyManager::EnemyType::Normal, 
+        Collision::Type::Enemy, this, 25.0f)
 {
 }
 
 // ‰Šú‰»
 void EnemyNormal::Initialize()
 {
+    GetTransform()->SetPosition({});
+
     GetTransform()->SetSize(size_);
     GetTransform()->SetTexSize(size_);
     GetTransform()->SetPivot(size_ * 0.5f);
@@ -38,6 +42,27 @@ void EnemyNormal::DrawDebug()
     }
 
 #endif // USE_IMGUI
+}
+
+// Õ“ËŒŸ’m
+void EnemyNormal::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
+{
+    if (type == Collision::Type::BulletOrbit)
+    {
+        GetTransform()->SetPosition(position);
+    }
+
+    if (type == Collision::Type::Player ||
+        type == Collision::Type::Enemy)
+    {
+        GetTransform()->SetPosition(position);
+    }
+
+    if (type == Collision::Type::Bullet)
+    {
+        Remove();
+        EnemyManager::Instance().Remove(this);
+    }
 }
 
 // ’ÇÕˆÚ“® Player‚ÉŒü‚©‚Á‚Äis‚·‚é

@@ -12,6 +12,8 @@ public:
     void Update(const float& elapsedTime) override;
     void DrawDebug() override;
 
+    void OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position) override;
+
 private:
     DirectX::XMFLOAT2   moveDirection_  = {};
     float               moveSpeed_      = 500.0f;

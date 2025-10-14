@@ -4,7 +4,8 @@
 #include <Input/Input.h>
 
 EnemyPlanaria::EnemyPlanaria()
-    :Enemy("EnemyPlanaria", EnemyManager::EnemyType::Planaria)
+    :Enemy("EnemyPlanaria", EnemyManager::EnemyType::Planaria,
+        Collision::Type::Enemy, this, 25.0f)
 {
 }
 
@@ -50,6 +51,11 @@ void EnemyPlanaria::Update(const float& elapsedTime)
 
 // ImGui
 void EnemyPlanaria::DrawDebug()
+{
+}
+
+// è’ìÀåüím
+void EnemyPlanaria::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
 {
 }
 

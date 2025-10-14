@@ -3,75 +3,58 @@
 #include "Object/Character/Enemy/EnemyManager.h"
 #include "Object/Character/Enemy/Enemy.h"
 #include "Object/Bullet/BulletManager.h"
+#include "Application/Common.h"
 
 // 更新
 void CollisionManager::Update()
 {
-    if (EnemyManager::Instance().GetEnemyCount() == 0) return;
-
-    const DirectX::XMFLOAT2 playerPosition = PlayerManager::Instance().GetTransform()->GetPosition();
-    std::vector<Enemy*> enemies = EnemyManager::Instance().GetEnemies();
-    const int maxEnemyCount = EnemyManager::Instance().GetEnemyCount();
-
-
-    // ----- Enemy Vs Enemy -----
-    for (int i = 0; i < maxEnemyCount; ++i)
+    // 生成処理
+    for (Collision* collision : generates_)
     {
-        for (int j = 0; j < maxEnemyCount; ++j)
-        {
-            // 同じ個体同士はスキップ
-            if (i == j) continue;
+        collisions_.emplace_back(collision);
+    }
+    generates_.clear();
 
-            DirectX::XMFLOAT2 resultPosition = {};
-            if (IntersectCircleVsCircle(
-                enemies.at(i)->GetTransform()->GetPosition(), enemies.at(i)->GetCollisionRadius(),
-                enemies.at(j)->GetTransform()->GetPosition(), enemies.at(j)->GetCollisionRadius(),
-                resultPosition))
+    // 更新
+    for (int i = 0; i < collisions_.size(); ++i)
+    {
+        for (int j = i + 1; j < collisions_.size(); ++j)
+        {
+            auto collision1 = collisions_.at(i);
+            auto collision2 = collisions_.at(j);
+
+            if (collisionMatrix[(int)collision1->GetType()][(int)collision2->GetType()] == false)
             {
-                enemies.at(j)->GetTransform()->SetPosition(resultPosition);
+                continue;
+            }
+            
+            DirectX::XMFLOAT2 resultPositionA = {};
+            DirectX::XMFLOAT2 resultPositionB = {};
+            if (IntersectCircleVsCircle(
+                collision1->GetTransform()->GetPosition(), collision1->GetRadius(),
+                collision2->GetTransform()->GetPosition(), collision2->GetRadius(),
+                resultPositionA, resultPositionB))
+            {
+                collision1->OnHit(collision2->GetType(), resultPositionA);
+                collision2->OnHit(collision1->GetType(), resultPositionB);
             }
         }
     }
 
-    // ----- Bullet Vs Enemy -----
-    // -----  PushCollider   -----
-    std::vector<BulletOrbit> bullets = BulletManager::Instance().GetOrvitBullets();
-    const int maxBulletCount = BulletManager::Instance().GetOrvitBulletCount();
-    for (int bulletIndex = 0; bulletIndex < maxBulletCount; ++bulletIndex)
+    // 削除処理
+    for (Collision* collision : removes_)
     {
-        if (bullets.at(bulletIndex).IsCollisionActive() == false) continue;
+        auto it = std::find(collisions_.begin(), collisions_.end(), collision);
 
-        for (int enemyIndex = 0; enemyIndex < maxEnemyCount; ++enemyIndex)
-        {
-            DirectX::XMFLOAT2 resultPosition = {};
-            if (IntersectCircleVsCircle(
-                bullets.at(bulletIndex).GetTransform()->GetPosition(), bullets.at(bulletIndex).GetCollisionRadius(),
-                enemies.at(enemyIndex)->GetTransform()->GetPosition(), enemies.at(enemyIndex)->GetCollisionRadius(),
-                resultPosition))
-            {
-                enemies.at(enemyIndex)->GetTransform()->SetPosition(resultPosition);
-            }
-        }
+        if (it != collisions_.end()) collisions_.erase(it);
+
+        SafeDeletePtr(collision);
     }
-
-    // Player VS Enemy
-    const float playerCollisionRadius = PlayerManager::Instance().GetPlayer()->GetCollisionRadius();
-
-    for (Enemy*& enemy : EnemyManager::Instance().GetEnemies())
-    {
-        DirectX::XMFLOAT2 resultPosition = {};
-        if (IntersectCircleVsCircle(
-            playerPosition, playerCollisionRadius,
-            enemy->GetTransform()->GetPosition(), enemy->GetCollisionRadius(),
-            resultPosition))
-        {
-            enemy->GetTransform()->SetPosition(resultPosition);
-        }
-    }
+    removes_.clear();
 }
 
 // 円 Vs 円
-const bool CollisionManager::IntersectCircleVsCircle(const DirectX::XMFLOAT2& positionA, const float& radiusA, const DirectX::XMFLOAT2& positionB, const float& radiusB, DirectX::XMFLOAT2& resultPosition)
+const bool CollisionManager::IntersectCircleVsCircle(const DirectX::XMFLOAT2& positionA, const float& radiusA, const DirectX::XMFLOAT2& positionB, const float& radiusB, DirectX::XMFLOAT2& resultPositionA, DirectX::XMFLOAT2& resultPositionB)
 {
     const DirectX::XMFLOAT2 vec = positionB - positionA;
     const float length = XMFloat2Length(vec);
@@ -80,7 +63,8 @@ const bool CollisionManager::IntersectCircleVsCircle(const DirectX::XMFLOAT2& po
     // 当たっていない
     if (overlap <= 0) return false;
 
-    resultPosition = positionB + XMFloat2Normalize(vec) * overlap;
+    resultPositionA = positionA + XMFloat2Normalize(vec) * -1.0f * overlap;
+    resultPositionB = positionB + XMFloat2Normalize(vec) * overlap;
 
     return true;
 }

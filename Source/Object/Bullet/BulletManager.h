@@ -33,7 +33,8 @@ public:
     Bullet* GetFiredBullet(const int& firedBulletIndex) { return firedBullets_.at(firedBulletIndex); }
     std::vector<Bullet*> GetFiredBullets() { return firedBullets_; }
 
-    std::vector<BulletOrbit>& GetOrvitBullets() { return orvitBullets_; }
+    std::vector<BulletOrbit*> GetOrvitBullets() { return orvitBullets_; }
+    BulletOrbit* GetOrbitBullet(const int& index) { return orvitBullets_.at(index); }
     const int GetOrvitBulletCount() const { return maxOrvitBullets_; }
 
 private:
@@ -44,8 +45,8 @@ private:
     const DirectX::XMFLOAT2 bulletSize_ = { 30.0f, 30.0f };
 
     // ---------- Player‚ÌŽü‚è‚É”z’u‚·‚éBullet ----------
-    std::vector<BulletOrbit>    orvitBullets_;
-    const int                   maxOrvitBullets_    = 5;
+    std::vector<BulletOrbit*>   orvitBullets_;
+    static const int            maxOrvitBullets_    = 5;
     float                       orvitAngle_         = 0.0f;
     float                       orvitRadius_        = 50.0f;
     

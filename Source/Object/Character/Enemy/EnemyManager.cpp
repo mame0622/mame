@@ -43,7 +43,7 @@ void EnemyManager::Update(const float& elapsedTime)
     for (Enemy* enemy : removes_)
     {
         auto it = std::find(enemies_.begin(), enemies_.end(), enemy);
-
+        
         if (it != enemies_.end()) enemies_.erase(it);
 
         SafeDeletePtr(enemy);

@@ -2,9 +2,10 @@
 #include "ImGui/ImGuiCtrl.h"
 #include "Graphics/Graphics.h"
 #include "BulletManager.h"
+#include "Collision/CollisionManager.h"
 
-Bullet::Bullet(const std::string& name, const BulletLevel & level)
-    : Object(name), level_(level)
+Bullet::Bullet(const std::string& name, const BulletLevel & level, const Collision::Type& type, Object* owner, const float& radius)
+    : Object(name), level_(level), collision_(new Collision(type, owner, radius))
 {
 }
 
@@ -20,8 +21,9 @@ void Bullet::Update(const float& elapsedTime)
         position.x >= maxPosition.x || position.y >= maxPosition.y)
     {
         // ‰¼: Bullet—LŒø‰»
-        BulletManager::Instance().GetOrvitBullets().at(GetBulletNumber()).SetCollisionActive(true);
+        BulletManager::Instance().GetOrbitBullet(GetBulletNumber())->SetCollisionActive(true);
         
+        Remove();
         BulletManager::Instance().Remove(this);
     }
 }
@@ -45,4 +47,10 @@ void Bullet::DrawDebug()
     }
 
 #endif // USE_IMGUI
+}
+
+void Bullet::Remove()
+{
+    CollisionManager::Instance().Remove(collision_);
+    collision_ = nullptr;
 }

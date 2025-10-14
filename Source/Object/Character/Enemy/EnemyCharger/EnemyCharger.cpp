@@ -3,7 +3,8 @@
 #include "ImGui/ImGuiCtrl.h"
 
 EnemyCharger::EnemyCharger()
-    :Enemy("EnemyCharger", EnemyManager::EnemyType::Charger)
+    :Enemy("EnemyCharger", EnemyManager::EnemyType::Charger,
+        Collision::Type::Enemy, this, 25.0f)
 {
 }
 
@@ -49,6 +50,11 @@ void EnemyCharger::DrawDebug()
 
         ImGui::TreePop();
     }
+}
+
+// Õ“ËŒŸ’m
+void EnemyCharger::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
+{
 }
 
 // ’ÇÕˆ—
