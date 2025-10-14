@@ -5,7 +5,7 @@
 
 EnemyNecromancer::EnemyNecromancer()
     :Enemy("EnemyNecromancer", EnemyManager::EnemyType::Necromancer,
-        Collision::Type::Enemy, this, 25.0f)
+        Collision::Type::Enemy, this, 50.0f)
 {
 
 }
@@ -18,8 +18,6 @@ void EnemyNecromancer::Initialize()
     GetTransform()->SetPivot(size * 0.5f);
 
     GetTransform()->SetPosition(400.0f, 300.0f);
-
-    SetCollisionRadius(50);
 }
 
 void EnemyNecromancer::Update(const float& elapsedTime)

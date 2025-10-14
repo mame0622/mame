@@ -12,8 +12,6 @@ void BulletOrbit::Initialize(const DirectX::XMFLOAT2& bulletSize)
     GetTransform()->SetSize(bulletSize);
     GetTransform()->SetTexSize(bulletSize);
     GetTransform()->SetPivot(bulletSize * 0.5f);
-
-    SetCollisionRadius(30.0f);
 }
 
 // XV

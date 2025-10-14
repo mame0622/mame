@@ -41,8 +41,6 @@ void Bullet::DrawDebug()
         ImGui::SliderInt("Level", &level, 0, 4);
         level_ = static_cast<BulletLevel>(level);
 
-        ImGui::DragFloat("CollisionRadius", &collisionRadius_);
-
         ImGui::TreePop();
     }
 

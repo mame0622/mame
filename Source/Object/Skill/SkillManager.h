@@ -1,7 +1,8 @@
 #pragma once
-#include "Skill.h"
 #include <vector>
 #include <set>
+
+class Skill;
 
 class SkillManager
 {

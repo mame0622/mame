@@ -19,8 +19,6 @@ void Player::Initialize()
     GetTransform()->SetSize(50.0f);
     GetTransform()->SetTexSize(50.0f);
     GetTransform()->SetPivot(25.0f);
-    
-    SetCollisionRadius(25.0f);
 }
 
 // XV

@@ -9,7 +9,5 @@ Character::Character(const std::string& name)
 void Character::DrawDebug()
 {
 #if USE_IMGUI
-    ImGui::DragFloat("Radius", &collisionRadius_);
-
 #endif // USE_IMGUI
 }

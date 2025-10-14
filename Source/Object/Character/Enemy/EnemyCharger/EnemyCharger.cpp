@@ -15,8 +15,6 @@ void EnemyCharger::Initialize()
     GetTransform()->SetSize(size);
     GetTransform()->SetTexSize(size);
     GetTransform()->SetPivot(size * 0.5f);
-
-    SetCollisionRadius(25.0f);
 }
 
 // XVˆ—

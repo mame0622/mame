@@ -5,7 +5,7 @@
 
 EnemyPlanaria::EnemyPlanaria()
     :Enemy("EnemyPlanaria", EnemyManager::EnemyType::Planaria,
-        Collision::Type::Enemy, this, 25.0f)
+        Collision::Type::Enemy, this, 50.0f)
 {
 }
 
@@ -16,8 +16,6 @@ void EnemyPlanaria::Initialize()
     GetTransform()->SetSize(size);
     GetTransform()->SetTexSize(size);
     GetTransform()->SetPivot(size * 0.5f);
-
-    SetCollisionRadius(50.0f);
 }
 
 // XVˆ—

@@ -21,9 +21,6 @@ public:
     void SetBulletNumber(const int& bulletNumber) { bulletNumber_ = bulletNumber; }
     const int GetBulletNumber() const { return bulletNumber_; }
 
-    void SetCollisionRadius(const float& radius) { collisionRadius_ = radius; }
-    const float GetCollisionRadius() const { return collisionRadius_; }
-
     void SetCollisionActive(const bool& flag) { isCollisionActive_ = flag; }
     const bool IsCollisionActive() const { return isCollisionActive_; }
 
@@ -35,7 +32,6 @@ private:
     // ---------- Žg—p‚µ‚Ä‚¢‚éBullet Number ----------
     int bulletNumber_ = 0;
 
-    float   collisionRadius_    = 1.0f;
     bool    isCollisionActive_  = true;
 
     Collision* collision_;

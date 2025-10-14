@@ -1,5 +1,6 @@
 #include "SkillManager.h"
 #include "Application/Common.h"
+#include "Skill.h"
 
 // XV
 void SkillManager::Update(const float& elapsedTime)
