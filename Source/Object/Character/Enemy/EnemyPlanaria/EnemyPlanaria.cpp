@@ -1,7 +1,7 @@
 #include "EnemyPlanaria.h"
 #include "Object/Character/Player/PlayerManager.h"
 #include "Object/Character/Enemy/EnemyNormal/EnemyNormal.h"
-#include <Input/Input.h>
+#include "Input/Input.h"
 
 EnemyPlanaria::EnemyPlanaria()
     :Enemy("EnemyPlanaria", EnemyManager::EnemyType::Planaria)
