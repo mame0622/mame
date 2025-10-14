@@ -5,6 +5,13 @@
 
 class SkillManager
 {
+public:
+    enum class SkillType
+    {
+        ChainLightning,
+        Max,
+    };
+
 private:
     SkillManager() {}
     ~SkillManager() {}
@@ -18,7 +25,7 @@ public:
 
     void Update(const float& elapsedTime);
 
-    void Regiset(Skill* skill) { generates_.insert(skill); }
+    void Register(Skill* skill) { generates_.insert(skill); }
     void Remove(Skill* skill) { removes_.insert(skill); }
     void Clear();
 

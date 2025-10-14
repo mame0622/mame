@@ -3,7 +3,7 @@
 class Skill
 {
 public:
-    Skill() {}
+    Skill();
     virtual ~Skill() {}
 
     virtual void Update(const float& elapsedTime) = 0;
