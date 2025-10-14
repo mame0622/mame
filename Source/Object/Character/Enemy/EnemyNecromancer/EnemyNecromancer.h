@@ -15,12 +15,26 @@ public:
 
 private:
     void Pursuit(const float& elapsedTime);
+    void Turn();
     void UndeadGeneration();
 
 private:
     DirectX::XMFLOAT2 moveVec_ = {};
-    float moveSpeed_ = 0;
+    float moveSpeed_ = 100;
 
     float generationTime_ = 0;
+
+    const float size_ = 100.0f;
+
+    int state_ = 0;
+
+    enum class State
+    {
+        Pursuit,
+        Necromancy,
+        End
+    };
+
+    State state_ = State::Pursuit;
 
 };
