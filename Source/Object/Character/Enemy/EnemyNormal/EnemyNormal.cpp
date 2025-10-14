@@ -18,7 +18,7 @@ void EnemyNormal::Initialize()
     GetTransform()->SetTexSize(size_);
     GetTransform()->SetPivot(size_ * 0.5f);
 
-    SetCollisionRadius(25.0f);
+    SetCollisionRadius(0);
 }
 
 // XV

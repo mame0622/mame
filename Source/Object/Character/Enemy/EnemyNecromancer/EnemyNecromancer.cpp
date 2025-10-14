@@ -1,6 +1,7 @@
 #include "EnemyNecromancer.h"
 #include "Object/Character/Player/PlayerManager.h"
 #include "Object/Character/Enemy/EnemyNormal/EnemyNormal.h"
+#include "Input/Input.h"
 
 EnemyNecromancer::EnemyNecromancer()
     :Enemy("EnemyNecromancer", EnemyManager::EnemyType::Necromancer,
@@ -16,7 +17,9 @@ void EnemyNecromancer::Initialize()
     GetTransform()->SetTexSize(size);
     GetTransform()->SetPivot(size * 0.5f);
 
-    SetCollisionRadius(50.0f);
+    GetTransform()->SetPosition(400.0f, 300.0f);
+
+    SetCollisionRadius(50);
 }
 
 void EnemyNecromancer::Update(const float& elapsedTime)
@@ -29,8 +32,10 @@ void EnemyNecromancer::Update(const float& elapsedTime)
     generationTime_ += elapsedTime;
 
     Pursuit(elapsedTime);
-
-    
+    // ç°ÇÕÉ{É^ÉìÇ≈îªíËÇµÇƒÇÈ(ç°å„ÇÕHPÇ™0Ç…Ç»Ç¡ÇΩèuä‘ì¸ÇÈ)
+    if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_X) {
+        UndeadGeneration();
+    }
 }
 
 void EnemyNecromancer::DrawDebug()
@@ -54,16 +59,45 @@ void EnemyNecromancer::Pursuit(const float& elapsedTime)
 
 void EnemyNecromancer::UndeadGeneration()
 {
-    // ê∂ê¨Ç∑ÇÈìGÇÃêî
-    const int undead = 4;
+    const DirectX::XMFLOAT2 moveDirection = XMFloat2Normalize(moveVec_);
+    const DirectX::XMFLOAT3 up = { 0.0f,1.0f,0.0f };
+    const DirectX::XMFLOAT3 moveVec3 = { moveDirection.x,0.0f,moveDirection.y };
+    const DirectX::XMVECTOR Up = DirectX::XMLoadFloat3(&up);
+    const DirectX::XMVECTOR MoveVec3 = DirectX::XMLoadFloat3(&moveVec3);
+    const DirectX::XMVECTOR RightVec3 = DirectX::XMVector3Cross(MoveVec3, Up);
+    DirectX::XMFLOAT3 rightVec3;
+    DirectX::XMStoreFloat3(&rightVec3, RightVec3);
+    const DirectX::XMFLOAT2 rightVec = { rightVec3.x, rightVec3.z };
+    const DirectX::XMFLOAT2 rightDirection = XMFloat2Normalize(rightVec);
+    const DirectX::XMFLOAT2 diagonallyVec = XMFloat2Normalize(moveDirection + rightVec);
 
-    for (int i = 0; i < undead; i++)
+        // ê∂ê¨Ç∑ÇÈìGÇÃêî
+    const int undead = 1;
+
+    for (int i = 0; i < undead; ++i)
     {
         EnemyNormal* enemy = new EnemyNormal();
-        // ê∂ê¨à íuê›íË
-        enemy->GetTransform()->SetPositionX(GetTransform()->GetPosition().x);
-        enemy->GetTransform()->SetPositionY(GetTransform()->GetPosition().y);
 
+        if (i == 0) {
+            // ê∂ê¨à íuê›íË
+            enemy->GetTransform()->SetPositionX(GetTransform()->GetCenterPosition().x + (diagonallyVec.x * 100.0f));
+            enemy->GetTransform()->SetPositionY(GetTransform()->GetCenterPosition().y + (diagonallyVec.y * 100.0f));
+        }
+        else if (i == 1)
+        {
+            enemy->GetTransform()->SetPositionX(GetTransform()->GetCenterPosition().x - (diagonallyVec.x * 100.0f));
+            enemy->GetTransform()->SetPositionY(GetTransform()->GetCenterPosition().y + (diagonallyVec.y * 100.0f));
+        }
+        else if (i == 2)
+        {
+            enemy->GetTransform()->SetPositionX(GetTransform()->GetCenterPosition().x + (diagonallyVec.x * 100.0f));
+            enemy->GetTransform()->SetPositionY(GetTransform()->GetCenterPosition().y - (diagonallyVec.y * 100.0f));
+        }
+        else if (i == 3)
+        {
+            enemy->GetTransform()->SetPositionX(GetTransform()->GetCenterPosition().x - (diagonallyVec.x * 100.0f));
+            enemy->GetTransform()->SetPositionY(GetTransform()->GetCenterPosition().y - (diagonallyVec.y * 100.0f));
+        }
         // ìoò^
         EnemyManager::Instance().Register(enemy);
     }

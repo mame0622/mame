@@ -19,7 +19,7 @@ private:
 
 private:
     DirectX::XMFLOAT2 moveVec_ = {};
-    float moveSpeed_ = 300.0f;
+    float moveSpeed_ = 0;
 
     float generationTime_ = 0;
 
