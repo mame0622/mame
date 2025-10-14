@@ -1,7 +1,6 @@
 #pragma once
 #include "Object/Skill/Skill.h"
-#include "Math/Transform.h"
-#include <vector>
+
 
 class SkillChainLightning : public Skill
 {
@@ -9,15 +8,17 @@ public:
     SkillChainLightning();
     ~SkillChainLightning() override {}
 
-    void Initialize();
-    void Update(const float& elapsedTime);
+    const bool Initialize();
+    void Update(const float& elapsedTime) override;
+    void DrawDebug() override;
 
 private:
     void FindNearestEnemy(const int& index);
 
+    void BuildTransform(const DirectX::XMFLOAT2& positionA, const DirectX::XMFLOAT2& positionB,
+        const DirectX::XMFLOAT2& sizeA, const int& transformIndex);
+
 private:
     std::vector<int> enemyIndexes_;
-
-    std::vector<Transform2D> transforms_;
 };
 

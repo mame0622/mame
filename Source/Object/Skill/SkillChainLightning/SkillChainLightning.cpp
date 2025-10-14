@@ -2,14 +2,23 @@
 #include "Object/Character/Player/PlayerManager.h"
 #include "Object/Character/Enemy/EnemyManager.h"
 #include "Object/Character/Enemy/Enemy.h"
+#include "ImGui/ImGuiCtrl.h"
 
 SkillChainLightning::SkillChainLightning()
+    : Skill(SkillManager::SkillType::ChainLightning)
 {
 }
 
-void SkillChainLightning::Initialize()
+// èâä˙âª
+const bool SkillChainLightning::Initialize()
 {
-    // PlayerÇ©ÇÁç≈Ç‡ãﬂÇ¢ìGÇ©ÇÁèáî‘Ç…ÇTëÃãÅÇﬂÇÈ
+    // ìGÇ™ë∂ç›ÇµÇƒÇ¢Ç»ÇØÇÍÇŒåÇÇƒÇ»Ç¢
+    if (EnemyManager::Instance().GetEnemyCount() == 0) return false;
+
+    // ç≈ëÂì¢î∞êîÇê›íË(ç≈ëÂ5ëÃ)
+    const int maxChainCount = (EnemyManager::Instance().GetEnemyCount() > 5) ? 5 : EnemyManager::Instance().GetEnemyCount();
+
+    // PlayerÇ©ÇÁç≈Ç‡ãﬂÇ¢ìGÇ©ÇÁèáî‘Ç…ãÅÇﬂÇÈ(ç≈ëÂ5ëÃ)
     const DirectX::XMFLOAT2 playerPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
     float minLength = FLT_MAX;
     int nearestEnemyIndex = 0;
@@ -26,17 +35,49 @@ void SkillChainLightning::Initialize()
     }
     enemyIndexes_.emplace_back(nearestEnemyIndex);
 
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < maxChainCount - 1; ++i)
     {
         FindNearestEnemy(enemyIndexes_.at(i));
     }
 
-    int a = 0;
+    // ãÅÇﬂÇΩÇæÇØÇÃìGÇÃà íuÇìoò^Ç∑ÇÈ
+    for (int i = 0; i < enemyIndexes_.size(); ++i)
+    {
+        transforms_.emplace_back(*EnemyManager::Instance().GetEnemy(enemyIndexes_.at(i))->GetTransform());
+    }
+
+    // TransformÇê›íËÇ∑ÇÈ
+    BuildTransform(PlayerManager::Instance().GetTransform()->GetPosition(),
+        EnemyManager::Instance().GetEnemy(enemyIndexes_.at(0))->GetTransform()->GetPosition(),
+        PlayerManager::Instance().GetTransform()->GetSize(), 0/*TransformIndex*/);
+    for (int enemyIndex = 0; enemyIndex < enemyIndexes_.size() - 1; ++enemyIndex)
+    {
+        BuildTransform(EnemyManager::Instance().GetEnemy(enemyIndexes_.at(enemyIndex))->GetTransform()->GetPosition(),
+            EnemyManager::Instance().GetEnemy(enemyIndexes_.at(enemyIndex + 1))->GetTransform()->GetPosition(),
+            EnemyManager::Instance().GetEnemy(enemyIndexes_.at(enemyIndex))->GetTransform()->GetSize(), enemyIndex + 1/*TransformIndex*/);
+    }
+
+    return true;
 }
 
+// çXêV
 void SkillChainLightning::Update(const float& elapsedTime)
 {
+    
+}
 
+// ImGui
+void SkillChainLightning::DrawDebug()
+{
+#if USE_IMGUI
+    if (ImGui::TreeNodeEx("SkillChainLightning"))
+    {
+        //transforms_.at(2).DrawDebug();
+
+        ImGui::TreePop();
+    }
+
+#endif // USE_IMGUI
 }
 
 void SkillChainLightning::FindNearestEnemy(const int& index)
@@ -48,6 +89,13 @@ void SkillChainLightning::FindNearestEnemy(const int& index)
     for (int enemyIndex = 0; enemyIndex < EnemyManager::Instance().GetEnemyCount(); ++enemyIndex)
     {
         if (enemyIndex == index) continue;
+        // ä˘Ç…ÉäÉXÉgÇ…ìoò^Ç≥ÇÍÇƒÇ¢ÇÈìGÇÕèúäOÇ∑ÇÈ
+        bool isContinue = false;
+        for (int listIndex = 0; listIndex < enemyIndexes_.size(); ++listIndex)
+        {
+            if (enemyIndex == enemyIndexes_.at(listIndex)) isContinue = true;
+        }
+        if (isContinue) continue;
 
         const DirectX::XMFLOAT2 enemyPosition = EnemyManager::Instance().GetEnemy(enemyIndex)->GetTransform()->GetPosition();
         const float length = XMFloat2Length(enemyPosition - startPosition);
@@ -60,4 +108,18 @@ void SkillChainLightning::FindNearestEnemy(const int& index)
     }
 
     enemyIndexes_.emplace_back(nearestEnemyIndex);
+}
+
+void SkillChainLightning::BuildTransform(const DirectX::XMFLOAT2& positionA, const DirectX::XMFLOAT2& positionB, const DirectX::XMFLOAT2& sizeA, const int& transformIndex)
+{
+    const DirectX::XMFLOAT2 vec         = positionB - positionA;
+    const float             length      = XMFloat2Length(vec);
+    const DirectX::XMFLOAT2 direction   = XMFloat2Normalize(vec);
+
+    // à íu,ëÂÇ´Ç≥,ÉeÉNÉXÉ`ÉÉÉTÉCÉY,äÓèÄì_,äpìx ê›íË
+    transforms_.at(transformIndex).SetPosition(positionA.x, positionA.y + sizeA.y * 0.5f);        
+    transforms_.at(transformIndex).SetSizeY(length);    
+    transforms_.at(transformIndex).SetTexSizeY(length);
+    transforms_.at(transformIndex).SetPivotY(0.0f);
+    transforms_.at(transformIndex).SetAngle(DirectX::XMConvertToDegrees(atan2f(direction.y, direction.x) - DirectX::XM_PIDIV2));
 }
