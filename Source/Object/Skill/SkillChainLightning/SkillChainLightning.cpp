@@ -63,7 +63,9 @@ const bool SkillChainLightning::Initialize()
 // 更新
 void SkillChainLightning::Update(const float& elapsedTime)
 {
-    
+    timer_ -= elapsedTime;
+
+    if (timer_ <= 0.0f) SkillManager::Instance().Remove(this);
 }
 
 // ImGui
@@ -72,7 +74,7 @@ void SkillChainLightning::DrawDebug()
 #if USE_IMGUI
     if (ImGui::TreeNodeEx("SkillChainLightning"))
     {
-        //transforms_.at(2).DrawDebug();
+        transforms_.at(0).DrawDebug();
 
         ImGui::TreePop();
     }
@@ -116,10 +118,20 @@ void SkillChainLightning::BuildTransform(const DirectX::XMFLOAT2& positionA, con
     const float             length      = XMFloat2Length(vec);
     const DirectX::XMFLOAT2 direction   = XMFloat2Normalize(vec);
 
-    // 位置,大きさ,テクスチャサイズ,基準点,角度 設定
-    transforms_.at(transformIndex).SetPosition(positionA.x, positionA.y + sizeA.y * 0.5f);        
-    transforms_.at(transformIndex).SetSizeY(length);    
-    transforms_.at(transformIndex).SetTexSizeY(length);
-    transforms_.at(transformIndex).SetPivotY(0.0f);
+    // Size, TextureSize 設定
+    const DirectX::XMFLOAT2 size = { 200.0f, length };
+    transforms_.at(transformIndex).SetSize(size);
+    transforms_.at(transformIndex).SetTexSize(size);
+
+    // Position 設定
+    const DirectX::XMFLOAT2 position =
+    {
+        positionA.x + sizeA.x * 0.5f - size.x * 0.5f,
+        positionA.y + sizeA.y * 0.5f
+    };
+    transforms_.at(transformIndex).SetPosition(position);   
+    
+    // Pivot, Angle 設定
+    transforms_.at(transformIndex).SetPivot(size.x * 0.5f, 0.0f);
     transforms_.at(transformIndex).SetAngle(DirectX::XMConvertToDegrees(atan2f(direction.y, direction.x) - DirectX::XM_PIDIV2));
 }
