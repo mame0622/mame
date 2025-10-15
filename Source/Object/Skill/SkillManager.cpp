@@ -1,6 +1,13 @@
 #include "SkillManager.h"
 #include "Application/Common.h"
 #include "Skill.h"
+#include "ImGui/ImGuiCtrl.h"
+
+SkillManager::SkillManager()
+{
+    // テクスチャ登録
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Skill/ChainLightning/ChainLightning.png", 50/*最大描画数*/));
+}
 
 // 更新
 void SkillManager::Update(const float& elapsedTime)
@@ -28,4 +35,41 @@ void SkillManager::Update(const float& elapsedTime)
         SafeDeletePtr(skill);
     }
     removes_.clear();
+}
+
+void SkillManager::Render()
+{
+    // テクスチャの種類ごとに描画する
+    for (int textureIndex = 0; textureIndex < static_cast<int>(SkillType::Max); ++textureIndex)
+    {
+        std::vector<Transform2D> transforms;
+        for (Skill*& skill : skills_)
+        {
+            if (skill->GetSkillType() == static_cast<SkillType>(textureIndex))
+            {
+                if (skill->GetTransformCount() == 0) continue;
+
+                for (int i = 0; i < skill->GetTransformCount(); ++i)
+                {
+                    transforms.emplace_back(skill->GetTransform(i));
+                }
+            }
+        }
+        spriteBatches_.at(textureIndex).Render(transforms);
+    }
+}
+
+void SkillManager::DrawDebug()
+{
+#if USE_IMGUI
+    ImGui::Begin("SkillManager");
+
+    for (Skill*& skill : skills_)
+    {
+        skill->DrawDebug();
+    }
+
+    ImGui::End();
+
+#endif // USE_IMGUI
 }

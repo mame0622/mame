@@ -33,6 +33,7 @@ void EnemyNormal::DrawDebug()
     if (ImGui::TreeNodeEx(name.c_str(), ImGuiTreeNodeFlags_Framed))
     {
         Character::DrawDebug();
+        Object::DrawDebug();
 
         ImGui::TreePop();
     }

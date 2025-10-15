@@ -3,6 +3,7 @@
 #include "Input/Input.h"
 #include "Object/Bullet/BulletManager.h"
 #include "Graphics/Graphics.h"
+#include "Object/Skill/SkillChainLightning/SkillChainLightning.h"
 
 Player::Player()
     : Character("Player"), 
@@ -43,6 +44,16 @@ void Player::Update(const float& elapsedTime)
     if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_A)
     {
         BulletManager::Instance().Launch();
+    }
+
+    // ƒXƒLƒ‹”­“®
+    if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_X)
+    {
+        SkillChainLightning* skill = new SkillChainLightning();
+        if (skill->Initialize() == false)
+        {
+            SkillManager::Instance().Remove(skill);
+        }
     }
 
     // •Ç(‰æ–ÊŠO)”»’è
