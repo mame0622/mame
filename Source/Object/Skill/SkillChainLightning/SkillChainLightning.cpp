@@ -65,6 +65,11 @@ void SkillChainLightning::Update(const float& elapsedTime)
 {
     timer_ -= elapsedTime;
 
+    for (int i = 0; i < transforms_.size(); ++i)
+    {
+        transforms_.at(i).SetColorA(timer_);
+    }
+
     if (timer_ <= 0.0f) SkillManager::Instance().Remove(this);
 }
 
@@ -82,6 +87,7 @@ void SkillChainLightning::DrawDebug()
 #endif // USE_IMGUI
 }
 
+// ˆê”Ô‹ß‚­‚Ì“G‚ðŒ©‚Â‚¯‚é
 void SkillChainLightning::FindNearestEnemy(const int& index)
 {
     const DirectX::XMFLOAT2 startPosition = EnemyManager::Instance().GetEnemy(index)->GetTransform()->GetCenterPosition();
