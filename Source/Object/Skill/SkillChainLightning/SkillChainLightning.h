@@ -20,5 +20,7 @@ private:
 
 private:
     std::vector<int> enemyIndexes_;
+
+    float timer_ = 1.0f;
 };
 
