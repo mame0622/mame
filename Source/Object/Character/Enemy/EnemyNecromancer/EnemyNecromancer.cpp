@@ -12,10 +12,9 @@ EnemyNecromancer::EnemyNecromancer()
 
 void EnemyNecromancer::Initialize()
 {
-    const float size = 100.0f;
-    GetTransform()->SetSize(size);
-    GetTransform()->SetTexSize(size);
-    GetTransform()->SetPivot(size * 0.5f);
+    GetTransform()->SetSize(size_);
+    GetTransform()->SetTexSize(size_);
+    GetTransform()->SetPivot(size_ * 0.5f);
 
     GetTransform()->SetPosition(400.0f, 300.0f);
 }
@@ -29,11 +28,33 @@ void EnemyNecromancer::Update(const float& elapsedTime)
 
     generationTime_ += elapsedTime;
 
-    Pursuit(elapsedTime);
-    // ç°ÇÕÉ{É^ÉìÇ≈îªíËÇµÇƒÇÈ(ç°å„ÇÕHPÇ™0Ç…Ç»Ç¡ÇΩèuä‘ì¸ÇÈ)
-    if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_X) {
-        UndeadGeneration();
+    switch (state_)
+    {
+    case State::Pursuit:
+        // í«ê’èàóù
+        Pursuit(elapsedTime);
+
+        if (generationTime_ > 3.0f)
+        {
+            generationTime_ = 0;
+            moveSpeed_ = 0;
+            state_ = State::Necromancy;
+        }
+        break;
+    case State::Necromancy:
+
+        Turn();
+
+        if (generationTime_ > 2.0f)
+        {
+            UndeadGeneration();
+            generationTime_ = 0;
+            moveSpeed_ = 100;
+            state_ = State::Pursuit;
+        }
+        break;
     }
+
 }
 
 void EnemyNecromancer::DrawDebug()
@@ -55,6 +76,14 @@ void EnemyNecromancer::Pursuit(const float& elapsedTime)
     GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveDirection.y, moveDirection.x) + DirectX::XM_PIDIV2));
 }
 
+// ê˘âÒèàóù
+void EnemyNecromancer::Turn()
+{
+    const DirectX::XMFLOAT2 moveDirection = XMFloat2Normalize(moveVec_);
+
+    GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveDirection.y, moveDirection.x) + DirectX::XM_PIDIV2));
+}
+
 void EnemyNecromancer::UndeadGeneration()
 {
     const DirectX::XMFLOAT2 moveDirection = XMFloat2Normalize(moveVec_);
@@ -62,15 +91,24 @@ void EnemyNecromancer::UndeadGeneration()
     const DirectX::XMFLOAT3 moveVec3 = { moveDirection.x,0.0f,moveDirection.y };
     const DirectX::XMVECTOR Up = DirectX::XMLoadFloat3(&up);
     const DirectX::XMVECTOR MoveVec3 = DirectX::XMLoadFloat3(&moveVec3);
-    const DirectX::XMVECTOR RightVec3 = DirectX::XMVector3Cross(MoveVec3, Up);
+    const DirectX::XMVECTOR RightVec3 = DirectX::XMVector3Cross(Up, MoveVec3);
     DirectX::XMFLOAT3 rightVec3;
     DirectX::XMStoreFloat3(&rightVec3, RightVec3);
     const DirectX::XMFLOAT2 rightVec = { rightVec3.x, rightVec3.z };
     const DirectX::XMFLOAT2 rightDirection = XMFloat2Normalize(rightVec);
     const DirectX::XMFLOAT2 diagonallyVec = XMFloat2Normalize(moveDirection + rightVec);
 
-        // ê∂ê¨Ç∑ÇÈìGÇÃêî
-    const int undead = 1;
+    // âEè„
+    const DirectX::XMFLOAT2 fr = XMFloat2Normalize(moveDirection + rightVec);
+    // âEâ∫
+    const DirectX::XMFLOAT2 fl = XMFloat2Normalize(rightVec - moveDirection);
+    // ç∂è„
+    const DirectX::XMFLOAT2 br = XMFloat2Normalize(moveDirection - rightVec);
+    // ç∂â∫
+    const DirectX::XMFLOAT2 bl = XMFloat2Normalize(fr * -1.0f);
+
+    // ê∂ê¨Ç∑ÇÈìGÇÃêî
+    const int undead = 4;
 
     for (int i = 0; i < undead; ++i)
     {
@@ -78,23 +116,23 @@ void EnemyNecromancer::UndeadGeneration()
 
         if (i == 0) {
             // ê∂ê¨à íuê›íË
-            enemy->GetTransform()->SetPositionX(GetTransform()->GetCenterPosition().x + (diagonallyVec.x * 100.0f));
-            enemy->GetTransform()->SetPositionY(GetTransform()->GetCenterPosition().y + (diagonallyVec.y * 100.0f));
+            enemy->GetTransform()->SetPositionX(GetTransform()->GetPosition().x + GetTransform()->GetPivotX() * 0.5f + (fr.x * 100.0f));
+            enemy->GetTransform()->SetPositionY(GetTransform()->GetPosition().y + GetTransform()->GetPivotY() * 0.5f + (fr.y * 100.0f));
         }
         else if (i == 1)
         {
-            enemy->GetTransform()->SetPositionX(GetTransform()->GetCenterPosition().x - (diagonallyVec.x * 100.0f));
-            enemy->GetTransform()->SetPositionY(GetTransform()->GetCenterPosition().y + (diagonallyVec.y * 100.0f));
+            enemy->GetTransform()->SetPositionX(GetTransform()->GetPosition().x + GetTransform()->GetPivotX() * 0.5f + (fl.x * 100.0f));
+            enemy->GetTransform()->SetPositionY(GetTransform()->GetPosition().y + GetTransform()->GetPivotY() * 0.5f + (fl.y * 100.0f));
         }
         else if (i == 2)
         {
-            enemy->GetTransform()->SetPositionX(GetTransform()->GetCenterPosition().x + (diagonallyVec.x * 100.0f));
-            enemy->GetTransform()->SetPositionY(GetTransform()->GetCenterPosition().y - (diagonallyVec.y * 100.0f));
+            enemy->GetTransform()->SetPositionX(GetTransform()->GetPosition().x + GetTransform()->GetPivotX() * 0.5f + (br.x * 100.0f));
+            enemy->GetTransform()->SetPositionY(GetTransform()->GetPosition().y + GetTransform()->GetPivotY() * 0.5f + (br.y * 100.0f));
         }
         else if (i == 3)
         {
-            enemy->GetTransform()->SetPositionX(GetTransform()->GetCenterPosition().x - (diagonallyVec.x * 100.0f));
-            enemy->GetTransform()->SetPositionY(GetTransform()->GetCenterPosition().y - (diagonallyVec.y * 100.0f));
+            enemy->GetTransform()->SetPositionX(GetTransform()->GetPosition().x + GetTransform()->GetPivotX() * 0.5f + (bl.x * 100.0f));
+            enemy->GetTransform()->SetPositionY(GetTransform()->GetPosition().y + GetTransform()->GetPivotY() * 0.5f + (bl.y * 100.0f));
         }
         // ìoò^
         EnemyManager::Instance().Register(enemy);
