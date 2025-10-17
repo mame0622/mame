@@ -1,11 +1,12 @@
 #pragma once
+
 #include "Object/Character/Enemy/Enemy.h"
 
-class EnemyNecromancer : public Enemy
+class EnemyRobot : public Enemy
 {
 public:
-    EnemyNecromancer();
-    ~EnemyNecromancer(){}
+    EnemyRobot();
+    ~EnemyRobot() {}
 
     void Initialize() override;
     void Update(const float& elapsedTime) override;
@@ -15,24 +16,10 @@ public:
 
 private:
     void Pursuit(const float& elapsedTime);
-    void Turn();
-    void UndeadGeneration();
 
 private:
     DirectX::XMFLOAT2 moveVec_ = {};
-    float moveSpeed_ = 100;
+    float moveSpeed_ = 100.0f;
 
-    float generationTime_ = 0;
-
-    const float size_ = 100.0f;
-
-    enum class State
-    {
-        Pursuit,
-        Necromancy,
-        End
-    };
-
-    State state_ = State::Pursuit;
-
+    const float size_ = 200.0f;
 };

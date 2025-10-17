@@ -14,6 +14,8 @@ public:
         Charger,
         Planaria,
         Necromancer,
+        MadScientist,
+        Robot,
         Max,
     };
 
