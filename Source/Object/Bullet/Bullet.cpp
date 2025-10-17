@@ -23,7 +23,7 @@ void Bullet::Update(const float& elapsedTime)
         // ‰¼: Bullet—LŒø‰»
         BulletManager::Instance().GetOrbitBullet(GetBulletNumber())->SetCollisionActive(true);
         
-        Remove();
+        CollisionRemove();
         BulletManager::Instance().Remove(this);
     }
 }
@@ -47,7 +47,7 @@ void Bullet::DrawDebug()
 #endif // USE_IMGUI
 }
 
-void Bullet::Remove()
+void Bullet::CollisionRemove()
 {
     CollisionManager::Instance().Remove(collision_);
     collision_ = nullptr;

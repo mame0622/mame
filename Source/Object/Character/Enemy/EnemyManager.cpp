@@ -12,10 +12,10 @@
 EnemyManager::EnemyManager()
 {
     // ÉeÉNÉXÉ`ÉÉìoò^
-    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy0.png", 50/*ç≈ëÂï`âÊêî*/));
-    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
-    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
-    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy0.png", 500/*ç≈ëÂï`âÊêî*/));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 500));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy2.png", 500));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy3.png", 500));
     spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
     spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
 }
@@ -84,19 +84,19 @@ void EnemyManager::DrawDebug()
     ImGui::Text("Register Button");
     if (ImGui::Button("Normal Enemy"))
     {
-        Register(new EnemyNormal());
+        EnemyNormal* enemy = new EnemyNormal();
     }
     if (ImGui::Button("Charger Enemy"))
     {
-        Register(new EnemyCharger());
+        EnemyCharger* enemy = new EnemyCharger();
     }
     if (ImGui::Button("Planaria Enemy"))
     {
-        Register(new EnemyPlanaria());
+        EnemyPlanaria* enemy = new EnemyPlanaria();
     }
     if (ImGui::Button("Necromancer Enemy"))
     {
-        Register(new EnemyNecromancer());
+        EnemyNecromancer* enemy = new EnemyNecromancer();
     }
     if (ImGui::Button("MadScientist Enemy"))
     {

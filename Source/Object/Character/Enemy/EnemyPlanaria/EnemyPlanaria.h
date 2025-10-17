@@ -17,5 +17,5 @@ private:
     void Pursuit(const float& elapsedTime);
 
 private:
-    float moveSpeed_ = 300.0f;
+    float moveSpeed_ = 100.0f;
 };

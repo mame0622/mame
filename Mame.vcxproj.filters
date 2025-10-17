@@ -121,14 +121,8 @@
     <Filter Include="Mame\Object\Skill\SkillChainLightning">
       <UniqueIdentifier>{abaaba32-85a0-4bf2-980e-597f71bbe7ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Mame\Object\Character\Enemy\EnemyMadScientist">
-      <UniqueIdentifier>{ce723a0e-e2d6-433b-9612-663c46aff77e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mame\Object\Character\Enemy\EnemyRobot">
-      <UniqueIdentifier>{6ce69414-160c-4954-bbaa-d73e1320b167}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mame\Object\Bullet\BulletStraight">
-      <UniqueIdentifier>{d07b7571-bd4a-4af0-9ad5-363ee437b7df}</UniqueIdentifier>
+    <Filter Include="Mame\Object\Skill\SkillSplitThunder">
+      <UniqueIdentifier>{f7a01fcd-8089-4a3b-a902-fa325e0eaf08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -279,14 +273,8 @@
     <ClCompile Include="Source\Object\Skill\SkillManager.cpp">
       <Filter>Mame\Object\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Object\Character\Enemy\EnemyMadScientist\EnemyMadScientist.cpp">
-      <Filter>Mame\Object\Character\Enemy\EnemyMadScientist</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobot.cpp">
-      <Filter>Mame\Object\Character\Enemy\EnemyRobot</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Object\Bullet\BulletStraight\BulletStraight.cpp">
-      <Filter>Mame\Object\Bullet\BulletStraight</Filter>
+    <ClCompile Include="Source\Object\Skill\SkillSplitThunder\SkillSplitThunder.cpp">
+      <Filter>Mame\Object\Skill\SkillSplitThunder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -464,14 +452,8 @@
     <ClInclude Include="Source\Object\Skill\SkillManager.h">
       <Filter>Mame\Object\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Object\Character\Enemy\EnemyMadScientist\EnemyMadScientist.h">
-      <Filter>Mame\Object\Character\Enemy\EnemyMadScientist</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobot.h">
-      <Filter>Mame\Object\Character\Enemy\EnemyRobot</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Object\Bullet\BulletStraight\BulletStraight.h">
-      <Filter>Mame\Object\Bullet\BulletStraight</Filter>
+    <ClInclude Include="Source\Object\Skill\SkillSplitThunder\SkillSplitThunder.h">
+      <Filter>Mame\Object\Skill\SkillSplitThunder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

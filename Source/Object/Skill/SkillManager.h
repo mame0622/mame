@@ -11,6 +11,7 @@ public:
     enum class SkillType
     {
         ChainLightning,
+        SkillSplitThunder,
         Max,
     };
 

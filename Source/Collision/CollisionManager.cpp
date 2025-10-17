@@ -15,6 +15,17 @@ void CollisionManager::Update()
     }
     generates_.clear();
 
+    // çÌèúèàóù
+    for (Collision* collision : removes_)
+    {
+        auto it = std::find(collisions_.begin(), collisions_.end(), collision);
+
+        if (it != collisions_.end()) collisions_.erase(it);
+
+        SafeDeletePtr(collision);
+    }
+    removes_.clear();
+
     // çXêV
     for (int i = 0; i < collisions_.size(); ++i)
     {
@@ -27,34 +38,22 @@ void CollisionManager::Update()
             {
                 continue;
             }
-            
-            DirectX::XMFLOAT2 resultPositionA = {};
-            DirectX::XMFLOAT2 resultPositionB = {};
+      
+            DirectX::XMFLOAT2 resultPosition = {};
             if (IntersectCircleVsCircle(
-                collision1->GetTransform()->GetPosition(), collision1->GetRadius(),
-                collision2->GetTransform()->GetPosition(), collision2->GetRadius(),
-                resultPositionA, resultPositionB))
+                collision1->GetTransform()->GetCenterPosition(), collision1->GetRadius(),
+                collision2->GetTransform()->GetCenterPosition(), collision2->GetRadius(),
+                collision2->GetTransform()->GetSize(), resultPosition))
             {
-                collision1->OnHit(collision2->GetType(), resultPositionA);
-                collision2->OnHit(collision1->GetType(), resultPositionB);
+                collision1->OnHit(collision2->GetType(), {});
+                collision2->OnHit(collision1->GetType(), resultPosition);
             }
         }
     }
-
-    // çÌèúèàóù
-    for (Collision* collision : removes_)
-    {
-        auto it = std::find(collisions_.begin(), collisions_.end(), collision);
-
-        if (it != collisions_.end()) collisions_.erase(it);
-
-        SafeDeletePtr(collision);
-    }
-    removes_.clear();
 }
 
 // â~ Vs â~
-const bool CollisionManager::IntersectCircleVsCircle(const DirectX::XMFLOAT2& positionA, const float& radiusA, const DirectX::XMFLOAT2& positionB, const float& radiusB, DirectX::XMFLOAT2& resultPositionA, DirectX::XMFLOAT2& resultPositionB)
+const bool CollisionManager::IntersectCircleVsCircle(const DirectX::XMFLOAT2& positionA, const float& radiusA, const DirectX::XMFLOAT2& positionB, const float& radiusB, const DirectX::XMFLOAT2& sizeB, DirectX::XMFLOAT2& resultPosition)
 {
     const DirectX::XMFLOAT2 vec = positionB - positionA;
     const float length = XMFloat2Length(vec);
@@ -63,8 +62,8 @@ const bool CollisionManager::IntersectCircleVsCircle(const DirectX::XMFLOAT2& po
     // ìñÇΩÇ¡ÇƒÇ¢Ç»Ç¢
     if (overlap <= 0) return false;
 
-    resultPositionA = positionA + XMFloat2Normalize(vec) * -1.0f * overlap;
-    resultPositionB = positionB + XMFloat2Normalize(vec) * overlap;
+    const DirectX::XMFLOAT2 offset = sizeB * 0.5f;
+    resultPosition = positionB + XMFloat2Normalize(vec) * overlap - offset;
 
     return true;
 }

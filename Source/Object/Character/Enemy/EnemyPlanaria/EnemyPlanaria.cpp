@@ -16,16 +16,21 @@ void EnemyPlanaria::Initialize()
     GetTransform()->SetSize(size);
     GetTransform()->SetTexSize(size);
     GetTransform()->SetPivot(size * 0.5f);
+
+    SetHealth(3);
 }
 
 // 更新処理
 void EnemyPlanaria::Update(const float& elapsedTime)
 {
+    Enemy::Update(elapsedTime);
+
     // 追跡処理
     Pursuit(elapsedTime);
 
     // 今はボタンで判定してる(今後はHPが0になった瞬間入る)
-    if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_X)
+    //if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_X)
+    if(GetHealth() <= 0)
     {
         // 分裂体の数
         const int numberOfSplits = 3;
@@ -36,15 +41,10 @@ void EnemyPlanaria::Update(const float& elapsedTime)
             // 生成位置設定
             enemy->GetTransform()->SetPositionX(GetTransform()->GetPosition().x + i);
             enemy->GetTransform()->SetPositionY(GetTransform()->GetPosition().y);
-            
-            // 登録
-            EnemyManager::Instance().Register(enemy);
         }
         // 破棄
         EnemyManager::Instance().Remove(this);
     }
-
-
 }
 
 // ImGui
@@ -55,6 +55,18 @@ void EnemyPlanaria::DrawDebug()
 // 衝突検知
 void EnemyPlanaria::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
 {
+    // 押し出し判定
+    if (type == Collision::Type::Enemy || type == Collision::Type::BulletOrbit)
+    {
+        if (position.x == 0.0f && position.y == 0.0f) return;
+
+        GetTransform()->SetPosition(position);
+    }
+
+    if (type == Collision::Type::Bullet)
+    {
+        Damage(1);
+    }
 }
 
 // 追跡処理

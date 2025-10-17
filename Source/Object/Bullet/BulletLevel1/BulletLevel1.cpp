@@ -67,7 +67,7 @@ void BulletLevel1::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& p
         BulletManager::Instance().GetOrbitBullet(GetBulletNumber())->SetCollisionActive(true);
 
         // •ª‚©‚ç‚ñ
-        Remove();
+        CollisionRemove();
         BulletManager::Instance().Remove(this);
     }
 }

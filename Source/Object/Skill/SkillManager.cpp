@@ -7,6 +7,7 @@ SkillManager::SkillManager()
 {
     // ƒeƒNƒXƒ`ƒƒ“o˜^
     spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Skill/ChainLightning/ChainLightning.png", 50/*Å‘å•`‰æ”*/));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Skill/SplitThunder/SplitThunder.png", 1000/*Å‘å•`‰æ”*/));
 }
 
 // XV

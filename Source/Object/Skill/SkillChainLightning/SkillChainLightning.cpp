@@ -5,7 +5,7 @@
 #include "ImGui/ImGuiCtrl.h"
 
 SkillChainLightning::SkillChainLightning()
-    : Skill(SkillManager::SkillType::ChainLightning)
+    : Skill("ChainLightning", SkillManager::SkillType::ChainLightning)
 {
 }
 
@@ -57,15 +57,33 @@ const bool SkillChainLightning::Initialize()
             EnemyManager::Instance().GetEnemy(enemyIndexes_.at(enemyIndex))->GetTransform()->GetSize(), enemyIndex + 1/*TransformIndex*/);
     }
 
+    for (int enemyIndex = 0; enemyIndex < enemyIndexes_.size(); ++enemyIndex)
+    {
+        // ダメージ処理
+        EnemyManager::Instance().GetEnemy(enemyIndexes_.at(enemyIndex))->Damage(3);
+    }
+
     return true;
 }
 
 // 更新
 void SkillChainLightning::Update(const float& elapsedTime)
 {
-    timer_ -= elapsedTime;
+    if (delayTimer_ > 0.0f)
+    {
+        delayTimer_ -= elapsedTime;
+    }
+    else
+    {
+        destroyTimer_ -= destroySpeed_ * elapsedTime;
 
-    if (timer_ <= 0.0f) SkillManager::Instance().Remove(this);
+        for (int i = 0; i < transforms_.size(); ++i)
+        {
+            transforms_.at(i).SetColorA(destroyTimer_);
+        }
+    }
+
+    if (destroyTimer_ <= 0.0f) SkillManager::Instance().Remove(this);
 }
 
 // ImGui
@@ -82,6 +100,7 @@ void SkillChainLightning::DrawDebug()
 #endif // USE_IMGUI
 }
 
+// 一番近くの敵を見つける
 void SkillChainLightning::FindNearestEnemy(const int& index)
 {
     const DirectX::XMFLOAT2 startPosition = EnemyManager::Instance().GetEnemy(index)->GetTransform()->GetCenterPosition();

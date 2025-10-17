@@ -16,5 +16,6 @@ public:
     void DrawDebug()                        override; // ImGui
 
 private:
+    float enemySpawnTimer_ = 0.0f;
 };
 

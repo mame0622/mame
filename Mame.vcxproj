@@ -65,6 +65,7 @@
     <ClCompile Include="Source\Object\Skill\Skill.cpp" />
     <ClCompile Include="Source\Object\Skill\SkillChainLightning\SkillChainLightning.cpp" />
     <ClCompile Include="Source\Object\Skill\SkillManager.cpp" />
+    <ClCompile Include="Source\Object\Skill\SkillSplitThunder\SkillSplitThunder.cpp" />
     <ClCompile Include="Source\Resource\Sprite\Sprite.cpp" />
     <ClCompile Include="Source\Resource\Sprite\SpriteBatch.cpp" />
     <ClCompile Include="Source\Resource\Texture\Texture.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="Source\Object\Skill\Skill.h" />
     <ClInclude Include="Source\Object\Skill\SkillChainLightning\SkillChainLightning.h" />
     <ClInclude Include="Source\Object\Skill\SkillManager.h" />
+    <ClInclude Include="Source\Object\Skill\SkillSplitThunder\SkillSplitThunder.h" />
     <ClInclude Include="Source\Resource\Sprite\Sprite.h" />
     <ClInclude Include="Source\Resource\Sprite\SpriteBatch.h" />
     <ClInclude Include="Source\Resource\Texture\Texture.h" />

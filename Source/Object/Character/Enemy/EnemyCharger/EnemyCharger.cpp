@@ -20,6 +20,8 @@ void EnemyCharger::Initialize()
 // 更新処理
 void EnemyCharger::Update(const float& elapsedTime)
 {
+    Enemy::Update(elapsedTime);
+
     // 進行方向ベクトル算出
     const DirectX::XMFLOAT2 playerCenterPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
     const DirectX::XMFLOAT2 enemyCenterPosition = GetTransform()->GetCenterPosition();

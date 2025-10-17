@@ -6,6 +6,7 @@
 #include "Object/Bullet/BulletManager.h"
 #include "Collision/CollisionManager.h"
 #include "Object/Skill/SkillManager.h"
+#include "Object/Character/Enemy/EnemyPlanaria/EnemyPlanaria.h"
 
 // リソース生成
 void DemoScene::CreateResource()
@@ -38,6 +39,22 @@ void DemoScene::Update(const float& elapsedTime)
     BulletManager::Instance().Update(elapsedTime);
 
     CollisionManager::Instance().Update();
+
+    // 敵を定期的に生成する
+    enemySpawnTimer_ -= elapsedTime;
+    if (enemySpawnTimer_ <= 0.0f)
+    {
+        EnemyPlanaria* enemy0 = new EnemyPlanaria();
+        EnemyPlanaria* enemy1 = new EnemyPlanaria();
+        EnemyPlanaria* enemy2 = new EnemyPlanaria();
+        EnemyPlanaria* enemy3 = new EnemyPlanaria();
+        enemy0->GetTransform()->SetPosition({});
+        enemy1->GetTransform()->SetPosition(SCREEN_WIDTH, 0.0f);
+        enemy2->GetTransform()->SetPosition(0.0f, SCREEN_HEIGHT);
+        enemy3->GetTransform()->SetPosition(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        enemySpawnTimer_ = 3.0f;
+    }
 }
 
 // 描画
