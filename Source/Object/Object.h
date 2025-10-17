@@ -10,7 +10,7 @@ public:
 
     virtual void DrawDebug(); // ImGui
 
-    virtual void OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position) = 0;
+    virtual void OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position) {}
 
     Transform2D* GetTransform() { return &transform_; }
     const std::string GetName() const { return name_; }

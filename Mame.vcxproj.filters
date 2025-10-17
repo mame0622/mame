@@ -121,6 +121,9 @@
     <Filter Include="Mame\Object\Skill\SkillChainLightning">
       <UniqueIdentifier>{abaaba32-85a0-4bf2-980e-597f71bbe7ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Skill\SkillSplitThunder">
+      <UniqueIdentifier>{f7a01fcd-8089-4a3b-a902-fa325e0eaf08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="Source\Object\Skill\SkillManager.cpp">
       <Filter>Mame\Object\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Skill\SkillSplitThunder\SkillSplitThunder.cpp">
+      <Filter>Mame\Object\Skill\SkillSplitThunder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -445,6 +451,9 @@
     </ClInclude>
     <ClInclude Include="Source\Object\Skill\SkillManager.h">
       <Filter>Mame\Object\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Skill\SkillSplitThunder\SkillSplitThunder.h">
+      <Filter>Mame\Object\Skill\SkillSplitThunder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,8 @@
 #include "Skill.h"
 #include "SkillManager.h"
 
-Skill::Skill(const SkillManager::SkillType& skillType)
-    : skillType_(skillType)
+Skill::Skill(const std::string& name, const SkillManager::SkillType& skillType)
+    : Object(name), skillType_(skillType)
 {
     // マネージャーに登録
     SkillManager::Instance().Register(this);

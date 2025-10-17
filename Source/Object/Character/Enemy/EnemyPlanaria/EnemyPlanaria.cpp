@@ -41,15 +41,10 @@ void EnemyPlanaria::Update(const float& elapsedTime)
             // ¶¬ˆÊ’uÝ’è
             enemy->GetTransform()->SetPositionX(GetTransform()->GetPosition().x + i);
             enemy->GetTransform()->SetPositionY(GetTransform()->GetPosition().y);
-            
-            // “o˜^
-            EnemyManager::Instance().Register(enemy);
         }
         // ”jŠü
         EnemyManager::Instance().Remove(this);
     }
-
-
 }
 
 // ImGui

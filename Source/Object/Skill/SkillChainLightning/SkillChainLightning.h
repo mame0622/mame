@@ -1,7 +1,6 @@
 #pragma once
 #include "Object/Skill/Skill.h"
 
-
 class SkillChainLightning : public Skill
 {
 public:

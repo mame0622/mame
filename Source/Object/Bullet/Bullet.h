@@ -24,7 +24,8 @@ public:
     void SetCollisionActive(const bool& flag) { isCollisionActive_ = flag; }
     const bool IsCollisionActive() const { return isCollisionActive_; }
 
-    void Remove();
+    // CollisionÇÃå„èàóù
+    void CollisionRemove();
 
 private:
     BulletLevel level_ = BulletLevel::One;

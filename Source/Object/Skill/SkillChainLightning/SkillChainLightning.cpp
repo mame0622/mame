@@ -5,7 +5,7 @@
 #include "ImGui/ImGuiCtrl.h"
 
 SkillChainLightning::SkillChainLightning()
-    : Skill(SkillManager::SkillType::ChainLightning)
+    : Skill("ChainLightning", SkillManager::SkillType::ChainLightning)
 {
 }
 

@@ -134,7 +134,5 @@ void EnemyNecromancer::UndeadGeneration()
             enemy->GetTransform()->SetPositionX(GetTransform()->GetPosition().x + GetTransform()->GetPivotX() * 0.5f + (bl.x * 100.0f));
             enemy->GetTransform()->SetPositionY(GetTransform()->GetPosition().y + GetTransform()->GetPivotY() * 0.5f + (bl.y * 100.0f));
         }
-        // “o˜^
-        EnemyManager::Instance().Register(enemy);
     }
 }

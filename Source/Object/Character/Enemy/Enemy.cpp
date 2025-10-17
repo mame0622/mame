@@ -4,6 +4,8 @@
 Enemy::Enemy(const std::string& name, const EnemyManager::EnemyType& enemyType, const Collision::Type& type, Object* owner, const float& radius)
     : Character(name), enemyType_(enemyType), collision_(new Collision(type, owner, radius))
 {
+    // ©•ª©g‚ğ“o˜^‚·‚é
+    EnemyManager::Instance().Register(this);
 }
 
 Enemy::~Enemy()

@@ -4,6 +4,7 @@
 #include "Object/Bullet/BulletManager.h"
 #include "Graphics/Graphics.h"
 #include "Object/Skill/SkillChainLightning/SkillChainLightning.h"
+#include "Object/Skill/SkillSplitThunder/SkillSplitThunder.h"
 
 Player::Player()
     : Character("Player"), 
@@ -54,6 +55,18 @@ void Player::Update(const float& elapsedTime)
         {
             SkillManager::Instance().Remove(skill);
         }
+    }
+
+    if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_Y)
+    {
+        const DirectX::XMFLOAT2 generatePosition = GetTransform()->GetPosition();
+
+        SkillSplitThunder* skill0 = new SkillSplitThunder();
+        SkillSplitThunder* skill1 = new SkillSplitThunder();
+        SkillSplitThunder* skill2 = new SkillSplitThunder();
+        skill0->Launch(0, generatePosition, moveDirection_, 0.0f);
+        skill1->Launch(0, generatePosition, moveDirection_, DirectX::XMConvertToRadians(120));
+        skill2->Launch(0, generatePosition, moveDirection_, DirectX::XMConvertToRadians(240));
     }
 
     // •Ç(‰æ–ÊŠO)”»’è

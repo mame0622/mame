@@ -80,19 +80,19 @@ void EnemyManager::DrawDebug()
     ImGui::Text("Register Button");
     if (ImGui::Button("Normal Enemy"))
     {
-        Register(new EnemyNormal());
+        EnemyNormal* enemy = new EnemyNormal();
     }
     if (ImGui::Button("Charger Enemy"))
     {
-        Register(new EnemyCharger());
+        EnemyCharger* enemy = new EnemyCharger();
     }
     if (ImGui::Button("Planaria Enemy"))
     {
-        Register(new EnemyPlanaria());
+        EnemyPlanaria* enemy = new EnemyPlanaria();
     }
     if (ImGui::Button("Necromancer Enemy"))
     {
-        Register(new EnemyNecromancer());
+        EnemyNecromancer* enemy = new EnemyNecromancer();
     }
 
 
