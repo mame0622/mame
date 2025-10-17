@@ -15,14 +15,18 @@ void EnemyNormal::Initialize()
     GetTransform()->SetSize(size_);
     GetTransform()->SetTexSize(size_);
     GetTransform()->SetPivot(size_ * 0.5f);
+
+    // 体力設定
+    SetHealth(1);
 }
 
 // 更新
 void EnemyNormal::Update(const float& elapsedTime)
 {
+    Enemy::Update(elapsedTime);
+    
     // 追跡移動
     Pursuit(elapsedTime);
-
 }
 
 // ImGui
@@ -44,21 +48,18 @@ void EnemyNormal::DrawDebug()
 // 衝突検知
 void EnemyNormal::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
 {
-    if (type == Collision::Type::BulletOrbit)
+    // 押し出し処理
+    if (type == Collision::Type::Player || type == Collision::Type::Enemy ||
+        type == Collision::Type::BulletOrbit)
     {
-        GetTransform()->SetPosition(position);
-    }
+        if (position.x == 0.0f && position.y == 0.0f) return;
 
-    if (type == Collision::Type::Player ||
-        type == Collision::Type::Enemy)
-    {
         GetTransform()->SetPosition(position);
     }
 
     if (type == Collision::Type::Bullet)
     {
-        Remove();
-        EnemyManager::Instance().Remove(this);
+        Damage(1);
     }
 }
 

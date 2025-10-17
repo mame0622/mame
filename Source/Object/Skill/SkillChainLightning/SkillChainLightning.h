@@ -21,6 +21,8 @@ private:
 private:
     std::vector<int> enemyIndexes_;
 
-    float timer_ = 1.0f;
+    float delayTimer_   = 0.5f;
+    float destroyTimer_ = 1.0f;
+    float destroySpeed_ = 2.0f;
 };
 

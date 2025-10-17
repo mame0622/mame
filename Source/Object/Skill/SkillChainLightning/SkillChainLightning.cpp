@@ -57,20 +57,33 @@ const bool SkillChainLightning::Initialize()
             EnemyManager::Instance().GetEnemy(enemyIndexes_.at(enemyIndex))->GetTransform()->GetSize(), enemyIndex + 1/*TransformIndex*/);
     }
 
+    for (int enemyIndex = 0; enemyIndex < enemyIndexes_.size(); ++enemyIndex)
+    {
+        // ダメージ処理
+        EnemyManager::Instance().GetEnemy(enemyIndexes_.at(enemyIndex))->Damage(3);
+    }
+
     return true;
 }
 
 // 更新
 void SkillChainLightning::Update(const float& elapsedTime)
 {
-    timer_ -= elapsedTime;
-
-    for (int i = 0; i < transforms_.size(); ++i)
+    if (delayTimer_ > 0.0f)
     {
-        transforms_.at(i).SetColorA(timer_);
+        delayTimer_ -= elapsedTime;
+    }
+    else
+    {
+        destroyTimer_ -= destroySpeed_ * elapsedTime;
+
+        for (int i = 0; i < transforms_.size(); ++i)
+        {
+            transforms_.at(i).SetColorA(destroyTimer_);
+        }
     }
 
-    if (timer_ <= 0.0f) SkillManager::Instance().Remove(this);
+    if (destroyTimer_ <= 0.0f) SkillManager::Instance().Remove(this);
 }
 
 // ImGui

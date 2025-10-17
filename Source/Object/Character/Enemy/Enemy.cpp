@@ -6,6 +6,11 @@ Enemy::Enemy(const std::string& name, const EnemyManager::EnemyType& enemyType, 
 {
 }
 
+Enemy::~Enemy()
+{
+    CollisionRemove();
+}
+
 // 初期化
 void Enemy::Initialize()
 {
@@ -13,10 +18,16 @@ void Enemy::Initialize()
 
 // 更新
 void Enemy::Update(const float& elapsedTime)
-{   
+{
+    // 体力がなくなったら消滅する
+    if (health_ <= 0)
+    {
+        EnemyManager::Instance().Remove(this);
+    }
 }
 
-void Enemy::Remove()
+// コリジョンの後処理
+void Enemy::CollisionRemove()
 {
     CollisionManager::Instance().Remove(collision_);
     collision_ = nullptr;

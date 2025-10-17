@@ -23,7 +23,7 @@ public:
     const bool IntersectCircleVsCircle(
         const DirectX::XMFLOAT2& positionA, const float& radiusA,
         const DirectX::XMFLOAT2& positionB, const float& radiusB,
-        DirectX::XMFLOAT2& resultPositionA, DirectX::XMFLOAT2& resultPositionB);
+        const DirectX::XMFLOAT2& sizeB, DirectX::XMFLOAT2& resultPosition);
 
     void Register(Collision* collision) { generates_.insert(collision); }
     void Remove(Collision* collision) { removes_.insert(collision); }

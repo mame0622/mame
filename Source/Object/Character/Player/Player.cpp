@@ -94,7 +94,4 @@ void Player::DrawDebug()
 // Õ“ËŒŸ’m
 void Player::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
 {
-
-    // ‰¼:€–S‚µ‚½‚è‚µ‚ÄAObject‚ªÁ‚¦‹‚é‚Æ‚«‚É“–‚½‚è”»’è‚àÁ‚·
-    //collision_.Remove();
 }

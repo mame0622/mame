@@ -26,8 +26,6 @@ private:
 
     const float size_ = 100.0f;
 
-    int state_ = 0;
-
     enum class State
     {
         Pursuit,
