@@ -10,10 +10,10 @@
 EnemyManager::EnemyManager()
 {
     // ƒeƒNƒXƒ`ƒƒ“o˜^
-    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy0.png", 100/*Å‘å•`‰æ”*/));
-    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
-    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
-    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy0.png", 500/*Å‘å•`‰æ”*/));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 500));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy2.png", 500));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy3.png", 500));
 }
 
 // I—¹‰»
