@@ -10,6 +10,7 @@ EnemyRobot::EnemyRobot()
 {
 }
 
+// 初期化
 void EnemyRobot::Initialize()
 {
     GetTransform()->SetSize(size_);
@@ -19,11 +20,12 @@ void EnemyRobot::Initialize()
     GetTransform()->SetPosition(300.0f, 400.0f);
 }
 
+// 更新
 void EnemyRobot::Update(const float& elapsedTime)
 {
     const DirectX::XMFLOAT2 playerCenterPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
     const DirectX::XMFLOAT2 enemyCenterPosition = GetTransform()->GetCenterPosition();
-    moveVec_ = playerCenterPosition - enemyCenterPosition;
+    moveDirection_ = XMFloat2Normalize(playerCenterPosition - enemyCenterPosition);
 
 
     // 追跡処理
@@ -32,16 +34,16 @@ void EnemyRobot::Update(const float& elapsedTime)
     //{
     //case 0:
     // 今はボタンで判定してる(今後はHPが0になった瞬間入る)
-    if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_LEFT_SHOULDER) {
+    if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_LEFT_SHOULDER) 
+    {        
         BulletStraight* bulletStraight = new BulletStraight;
         BulletManager::Instance().Register(bulletStraight);
         
+        // 弾の生成位置を決める
+        const DirectX::XMFLOAT2 generatePosition = enemyCenterPosition + moveDirection_ * generateOffset_;
 
-        const DirectX::XMFLOAT2 moveDirection = XMFloat2Normalize(moveVec_);
-
-        bulletStraight->Initialize(100.0f, GetTransform()->GetCenterPosition(), moveDirection);
-
-        bulletStraight->Launch(elapsedTime, moveDirection);
+        bulletStraight->Initialize(generatePosition);
+        bulletStraight->Launch(moveDirection_);
     }
     //    break;
     //}
@@ -59,8 +61,6 @@ void EnemyRobot::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& pos
 // 追跡処理
 void EnemyRobot::Pursuit(const float& elapsedTime)
 {
-    const DirectX::XMFLOAT2 moveDirection = XMFloat2Normalize(moveVec_);
-
-    GetTransform()->AddPosition(moveDirection * moveSpeed_ * elapsedTime);
-    GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveDirection.y, moveDirection.x) + DirectX::XM_PIDIV2));
+    GetTransform()->AddPosition(moveDirection_ * moveSpeed_ * elapsedTime);
+    GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveDirection_.y, moveDirection_.x) + DirectX::XM_PIDIV2));
 }
