@@ -8,8 +8,7 @@ BulletStraight::BulletStraight()
 
 }
 
-void BulletStraight::Initialize(const float& length, const DirectX::XMFLOAT2& moveDirection, 
-    const DirectX::XMFLOAT2& enemyCenterPosition)
+void BulletStraight::Initialize(const float& length, const DirectX::XMFLOAT2& enemyCenterPosition, const DirectX::XMFLOAT2& moveDirection)
 {
     // Bulletのサイズ設定
     const DirectX::XMFLOAT2 bulletSize = { 30.0f, 30.0f };
@@ -17,8 +16,6 @@ void BulletStraight::Initialize(const float& length, const DirectX::XMFLOAT2& mo
     GetTransform()->SetTexSize(bulletSize);
     GetTransform()->SetPivot(bulletSize * 0.5f);
 
-    // 進行方向設定
-    moveDirection_ = moveDirection;
 
     // 生成位置設定
     const DirectX::XMFLOAT2 offsetPosition = GetTransform()->GetSize() * 0.5f;
@@ -32,7 +29,6 @@ void BulletStraight::Initialize(const float& length, const DirectX::XMFLOAT2& mo
 void BulletStraight::Update(const float& elapsedTime)
 {
     Bullet::Update(elapsedTime);
-
     GetTransform()->AddPosition(moveDirection_ * moveSpeed_ * elapsedTime);
 }
 
@@ -42,4 +38,10 @@ void BulletStraight::DrawDebug()
 
 void BulletStraight::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
 {
+}
+
+// 発射
+void BulletStraight::Launch(const float& elapsedTime, const DirectX::XMFLOAT2& moveDirection)
+{
+    moveDirection_ = moveDirection;
 }

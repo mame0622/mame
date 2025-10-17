@@ -19,7 +19,9 @@ private:
 
 private:
     DirectX::XMFLOAT2 moveVec_ = {};
-    float moveSpeed_ = 100.0f;
+    float moveSpeed_ = 0;
 
     const float size_ = 200.0f;
+
+    int state_ = 0;
 };

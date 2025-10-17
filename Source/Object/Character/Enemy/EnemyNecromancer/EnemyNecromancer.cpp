@@ -1,7 +1,6 @@
 #include "EnemyNecromancer.h"
 #include "Object/Character/Player/PlayerManager.h"
 #include "Object/Character/Enemy/EnemyNormal/EnemyNormal.h"
-#include "Input/Input.h"
 
 EnemyNecromancer::EnemyNecromancer()
     :Enemy("EnemyNecromancer", EnemyManager::EnemyType::Necromancer,
