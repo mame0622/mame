@@ -1,11 +1,12 @@
 #pragma once
+
 #include "Object/Character/Enemy/Enemy.h"
 
-class EnemyPlanaria : public Enemy
+class EnemyRobot : public Enemy
 {
 public:
-    EnemyPlanaria();
-    ~EnemyPlanaria(){}
+    EnemyRobot();
+    ~EnemyRobot() {}
 
     void Initialize() override;
     void Update(const float& elapsedTime) override;
@@ -17,5 +18,10 @@ private:
     void Pursuit(const float& elapsedTime);
 
 private:
-    float moveSpeed_ = 0.0f;
+    DirectX::XMFLOAT2 moveVec_ = {};
+    float moveSpeed_ = 0;
+
+    const float size_ = 200.0f;
+
+    int state_ = 0;
 };

@@ -1,7 +1,6 @@
 #include "EnemyNecromancer.h"
 #include "Object/Character/Player/PlayerManager.h"
 #include "Object/Character/Enemy/EnemyNormal/EnemyNormal.h"
-#include "Input/Input.h"
 
 EnemyNecromancer::EnemyNecromancer()
     :Enemy("EnemyNecromancer", EnemyManager::EnemyType::Necromancer,
@@ -15,8 +14,6 @@ void EnemyNecromancer::Initialize()
     GetTransform()->SetSize(size_);
     GetTransform()->SetTexSize(size_);
     GetTransform()->SetPivot(size_ * 0.5f);
-
-    GetTransform()->SetPosition(400.0f, 300.0f);
 }
 
 void EnemyNecromancer::Update(const float& elapsedTime)

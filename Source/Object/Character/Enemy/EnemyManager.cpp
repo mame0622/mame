@@ -4,6 +4,8 @@
 #include "Object/Character/Enemy/EnemyCharger/EnemyCharger.h"
 #include "Object/Character/Enemy/EnemyPlanaria/EnemyPlanaria.h"
 #include "Object/Character/Enemy/EnemyNecromancer/EnemyNecromancer.h"
+#include "Object/Character/Enemy/EnemyMadScientist/EnemyMadScientist.h"
+#include "Object/Character/Enemy/EnemyRobot/EnemyRobot.h"
 #include "Application/Common.h"
 #include "ImGui/ImGuiCtrl.h"
 
@@ -14,6 +16,8 @@ EnemyManager::EnemyManager()
     spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 500));
     spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy2.png", 500));
     spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy3.png", 500));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
+    spriteBatches_.emplace_back(SpriteBatch(L"./Resources/Image/Enemy/Enemy1.png", 50));
 }
 
 // èIóπâª
@@ -94,6 +98,15 @@ void EnemyManager::DrawDebug()
     {
         EnemyNecromancer* enemy = new EnemyNecromancer();
     }
+    if (ImGui::Button("MadScientist Enemy"))
+    {
+        Register(new EnemyMadScientist());
+    }
+    if (ImGui::Button("Robot Enemy"))
+    {
+        Register(new EnemyRobot());
+    }
+    
 
 
     ImGui::End(); // EnemyManager
