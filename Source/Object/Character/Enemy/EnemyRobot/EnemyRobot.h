@@ -18,8 +18,10 @@ private:
     void Pursuit(const float& elapsedTime);
 
 private:
-    DirectX::XMFLOAT2 moveVec_ = {};
-    float moveSpeed_ = 0;
+    DirectX::XMFLOAT2   moveDirection_  = {};
+    float               moveSpeed_      = 0;
+
+    float generateOffset_ = 100.0f;
 
     const float size_ = 200.0f;
 
