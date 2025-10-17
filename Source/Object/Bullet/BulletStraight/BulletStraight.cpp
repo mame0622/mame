@@ -16,6 +16,7 @@ void BulletStraight::Initialize(const float& length, const DirectX::XMFLOAT2& en
     GetTransform()->SetTexSize(bulletSize);
     GetTransform()->SetPivot(bulletSize * 0.5f);
 
+    
 
     // ¶¬ˆÊ’uÝ’è
     const DirectX::XMFLOAT2 offsetPosition = GetTransform()->GetSize() * 0.5f;
