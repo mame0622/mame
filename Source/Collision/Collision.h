@@ -29,6 +29,8 @@ public:
 
 private:
     const Type  type_;
-    Object*     owner_;
-    const float radius_;
+    Object*     owner_;     // ‚¿å
+    const float radius_;    // “–‚½‚è”»’è”¼Œa
+
+    bool isActive_ = true;
 };
