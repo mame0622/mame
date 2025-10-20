@@ -19,11 +19,24 @@ public:
     const DirectX::XMFLOAT2 GetMoveDirection() const { return moveDirection_; }
 
 private:
+    void Move(const float& elapsedTime);    // ˆÚ“®ˆ—
+    void Turn();                            // ù‰ñˆ—
+    void Blink();                            // ‰ñ”ğ
+    void ClampPosition();                   // ‰æ–Ê“à‚ÉˆÊ’u‚ğû‚ß‚é
+
+
+private:
     SpriteBatch spriteBatch_;
 
     // ---------- Move ----------
     DirectX::XMFLOAT2   moveDirection_ = { 0.0f, -1.0f };
     float               moveSpeed_      = 500.0f;
+
+    DirectX::XMFLOAT2   blinkDirection_     = {};
+    float               blinkPower_         = 2000.0f;
+    float               currentBlinkPower_  = 0.0f;
+    float               deceleration_       = 8000.0f;
+
 
     Collision* collision_;
 

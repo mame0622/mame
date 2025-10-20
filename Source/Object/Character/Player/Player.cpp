@@ -27,18 +27,15 @@ void Player::Initialize()
 void Player::Update(const float& elapsedTime)
 {
     // 移動処理
-    const float aLx = Input::Instance().GetGamePad().GetAxisLx();
-    const float aLy = Input::Instance().GetGamePad().GetAxisLy();
-    const DirectX::XMFLOAT2 moveDirection = XMFloat2Normalize({ aLx, -aLy });
-    GetTransform()->AddPositionX(moveDirection.x * moveSpeed_ * elapsedTime);
-    GetTransform()->AddPositionY(moveDirection.y * moveSpeed_ * elapsedTime);
+    Move(elapsedTime);
 
     // 旋回処理
-    if(moveDirection.x != 0.0f || moveDirection.y != 0.0f)
-    {
-        GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveDirection.y, moveDirection.x) + DirectX::XM_PIDIV2));
+    Turn();
 
-        moveDirection_ = moveDirection; // 保存する
+    // 回避 Shift
+    if (Input::Instance().GetGamePad().GetButtonDown() & GamePad::BTN_RIGHT_TRIGGER)
+    {
+        Blink();
     }
 
     // 弾発射 Aボタン Space
@@ -69,16 +66,8 @@ void Player::Update(const float& elapsedTime)
         skill2->Launch(0, generatePosition, moveDirection_, DirectX::XMConvertToRadians(240));
     }
 
-    // 壁(画面外)判定
-    DirectX::XMFLOAT2 position = GetTransform()->GetPosition();
-    const DirectX::XMFLOAT2 size = GetTransform()->GetSize();
-    const DirectX::XMFLOAT2 collisionWidth = { position.x - collisionOffset_.x, position.x + size.x + collisionOffset_.x};
-    const DirectX::XMFLOAT2 collisionHeight = { position.y - collisionOffset_.y, position.y + size.y + collisionOffset_.y };
-    if (collisionWidth.x <= 0.0f) position.x = collisionOffset_.x;
-    if (collisionWidth.y >= SCREEN_WIDTH) position.x = SCREEN_WIDTH - size.x - collisionOffset_.x;
-    if (collisionHeight.x <= 0.0f) position.y = collisionOffset_.y;
-    if (collisionHeight.y >= SCREEN_HEIGHT) position.y = SCREEN_HEIGHT - size.y - collisionOffset_.y;
-    GetTransform()->SetPosition(position);
+    // 画面内に位置を収める
+    ClampPosition();
 }
 
 // 描画
@@ -95,6 +84,9 @@ void Player::DrawDebug()
 #if USE_IMGUI
     ImGui::Begin(GetName().c_str());
 
+    ImGui::DragFloat("BlinkPower", &blinkPower_);
+    ImGui::DragFloat("Deceleration", &deceleration_);
+
     ImGui::DragFloat2("CollisionOffset", &collisionOffset_.x);
 
     Object::DrawDebug();
@@ -107,4 +99,60 @@ void Player::DrawDebug()
 // 衝突検知
 void Player::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
 {
+    if (type == Collision::Type::Enemy)
+    {
+
+    }
+}
+
+// 移動処理
+void Player::Move(const float& elapsedTime)
+{
+    // 入力による移動
+    const float aLx = Input::Instance().GetGamePad().GetAxisLx();
+    const float aLy = Input::Instance().GetGamePad().GetAxisLy();
+    const DirectX::XMFLOAT2 moveDirection = XMFloat2Normalize({ aLx, -aLy });
+    if (moveDirection.x != 0.0f || moveDirection.y != 0.0f)
+    {
+        moveDirection_ = moveDirection;
+        blinkDirection_ = moveDirection;
+    }    
+    GetTransform()->AddPosition(moveDirection * moveSpeed_ * elapsedTime);
+
+    // 回避による移動
+    currentBlinkPower_ -= deceleration_ * elapsedTime;
+    if (currentBlinkPower_ > 0.0f)
+    {
+        GetTransform()->AddPosition(blinkDirection_ * currentBlinkPower_ * elapsedTime);
+    }
+}
+
+// 旋回処理
+void Player::Turn()
+{
+    // 入力がなければ旋回処理を行わない
+    if (moveDirection_.x == 0.0f && moveDirection_.y == 0.0f) return;
+
+    GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveDirection_.y, moveDirection_.x) + DirectX::XM_PIDIV2));
+}
+
+// 回避
+void Player::Blink()
+{
+    blinkDirection_ = moveDirection_;
+    currentBlinkPower_ = blinkPower_;
+}
+
+// 画面内に位置を収める
+void Player::ClampPosition()
+{
+    DirectX::XMFLOAT2 position = GetTransform()->GetPosition();
+    const DirectX::XMFLOAT2 size = GetTransform()->GetSize();
+    const DirectX::XMFLOAT2 collisionWidth = { position.x - collisionOffset_.x, position.x + size.x + collisionOffset_.x };
+    const DirectX::XMFLOAT2 collisionHeight = { position.y - collisionOffset_.y, position.y + size.y + collisionOffset_.y };
+    if (collisionWidth.x <= 0.0f) position.x = collisionOffset_.x;
+    if (collisionWidth.y >= SCREEN_WIDTH) position.x = SCREEN_WIDTH - size.x - collisionOffset_.x;
+    if (collisionHeight.x <= 0.0f) position.y = collisionOffset_.y;
+    if (collisionHeight.y >= SCREEN_HEIGHT) position.y = SCREEN_HEIGHT - size.y - collisionOffset_.y;
+    GetTransform()->SetPosition(position);
 }
