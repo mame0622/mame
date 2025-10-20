@@ -17,6 +17,8 @@ public:
 private:
     void Pursuit(const float& elapsedTime);
 
+    void BulletGeneration(const DirectX::XMFLOAT2 enemyCenterPosition);
+
 private:
     DirectX::XMFLOAT2   moveDirection_  = {};
     float               moveSpeed_      = 0;

@@ -133,6 +133,9 @@
     <Filter Include="Mame\Object\Character\Enemy\EnemyRobot">
       <UniqueIdentifier>{c876cc79-6bba-43de-9d5a-8089327ed9ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletHoming">
+      <UniqueIdentifier>{b3314476-5d14-4c2d-b320-7c60ccc0f3ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
@@ -296,6 +299,12 @@
     </ClCompile>
     <ClCompile Include="Source\Object\Character\Enemy\EnemyNecromancer\EnemyNecromancerState.cpp">
       <Filter>Mame\Object\Character\Enemy\EnemyNecromancer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletHoming\BulletHoming.cpp">
+      <Filter>Mame\Object\Bullet\BulletHoming</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobotState.cpp">
+      <Filter>Mame\Object\Character\Enemy\EnemyRobot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -487,6 +496,12 @@
     </ClInclude>
     <ClInclude Include="Source\Object\Character\Enemy\EnemyNecromancer\EnemyNecromancerState.h">
       <Filter>Mame\Object\Character\Enemy\EnemyNecromancer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletHoming\BulletHoming.h">
+      <Filter>Mame\Object\Bullet\BulletHoming</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobotState.h">
+      <Filter>Mame\Object\Character\Enemy\EnemyRobot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
