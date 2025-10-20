@@ -56,6 +56,7 @@
     <ClCompile Include="Source\Object\Character\Enemy\EnemyMadScientist\EnemyMadScientist.cpp" />
     <ClCompile Include="Source\Object\Character\Enemy\EnemyManager.cpp" />
     <ClCompile Include="Source\Object\Character\Enemy\EnemyNecromancer\EnemyNecromancer.cpp" />
+    <ClCompile Include="Source\Object\Character\Enemy\EnemyNecromancer\EnemyNecromancerState.cpp" />
     <ClCompile Include="Source\Object\Character\Enemy\EnemyNormal\EnemyNormal.cpp" />
     <ClCompile Include="Source\Object\Character\Enemy\EnemyPlanaria\EnemyPlanaria.cpp" />
     <ClCompile Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobot.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Source\Object\Character\Enemy\EnemyMadScientist\EnemyMadScientist.h" />
     <ClInclude Include="Source\Object\Character\Enemy\EnemyManager.h" />
     <ClInclude Include="Source\Object\Character\Enemy\EnemyNecromancer\EnemyNecromancer.h" />
+    <ClInclude Include="Source\Object\Character\Enemy\EnemyNecromancer\EnemyNecromancerState.h" />
     <ClInclude Include="Source\Object\Character\Enemy\EnemyNormal\EnemyNormal.h" />
     <ClInclude Include="Source\Object\Character\Enemy\EnemyPlanaria\EnemyPlanaria.h" />
     <ClInclude Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobot.h" />

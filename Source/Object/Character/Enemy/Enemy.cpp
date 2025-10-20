@@ -6,6 +6,8 @@ Enemy::Enemy(const std::string& name, const EnemyManager::EnemyType& enemyType, 
 {
     // 自分自身を登録する
     EnemyManager::Instance().Register(this);
+
+    stateMachine_.reset(new StateMachine<State<Enemy>>);
 }
 
 Enemy::~Enemy()
@@ -33,4 +35,15 @@ void Enemy::CollisionRemove()
 {
     CollisionManager::Instance().Remove(collision_);
     collision_ = nullptr;
+}
+
+void Enemy::ChangeState(const int& state)
+{
+    // 前回のステートを記録
+    oldState_ = currentState_;
+
+    // 現在のステートを記録
+    currentState_ = state;
+
+    stateMachine_.get()->ChangeState(state);
 }

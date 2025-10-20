@@ -294,6 +294,9 @@
     <ClCompile Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobot.cpp">
       <Filter>Mame\Object\Character\Enemy\EnemyRobot</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Object\Character\Enemy\EnemyNecromancer\EnemyNecromancerState.cpp">
+      <Filter>Mame\Object\Character\Enemy\EnemyNecromancer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application\Application.h">
@@ -481,6 +484,9 @@
     </ClInclude>
     <ClInclude Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobot.h">
       <Filter>Mame\Object\Character\Enemy\EnemyRobot</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Character\Enemy\EnemyNecromancer\EnemyNecromancerState.h">
+      <Filter>Mame\Object\Character\Enemy\EnemyNecromancer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,14 @@
 class EnemyNecromancer : public Enemy
 {
 public:
+    enum class State
+    {
+        Pursuit,
+        Necromancy,
+        End
+    };
+
+public:
     EnemyNecromancer();
     ~EnemyNecromancer(){}
 
@@ -13,26 +21,12 @@ public:
 
     void OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position) override;
 
+    // ---------- StateMachine ----------
+    void ChangeState(const State& state) { Enemy::ChangeState(static_cast<int>(state)); }
+
 private:
-    void Pursuit(const float& elapsedTime);
     void Turn();
-    void UndeadGeneration();
 
 private:
-    DirectX::XMFLOAT2 moveVec_ = {};
-    float moveSpeed_ = 100;
-
-    float generationTime_ = 0;
-
     const float size_ = 100.0f;
-
-    enum class State
-    {
-        Pursuit,
-        Necromancy,
-        End
-    };
-
-    State state_ = State::Pursuit;
-
 };
