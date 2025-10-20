@@ -29,7 +29,29 @@ void BulletHoming::Update(const float& elapsedTime)
 {
     Bullet::Update(elapsedTime);
 
-    Pursuit(elapsedTime);
+    switch (state_)
+    {
+    case 0:
+        Pursuit(elapsedTime);
+
+        break;
+    case 1:
+
+        // 前方向ベクトル算出
+        const float angleRadians = DirectX::XMConvertToRadians(GetTransform()->GetAngle());
+        const DirectX::XMFLOAT2 forward = { sinf(angleRadians),-cosf(angleRadians) };
+        GetTransform()->AddPosition(forward * moveSpeed_ * elapsedTime);
+
+        break;
+    }
+
+    const float detectionRange = 70.0f;
+
+    if (detectionRange > length_)
+    {
+        state_ = 1;
+    }
+   
 }
 
 void BulletHoming::DrawDebug()
@@ -50,7 +72,9 @@ void  BulletHoming::Pursuit(const float& elapsedTime)
 {
     const DirectX::XMFLOAT2 playerCenterPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
     const DirectX::XMFLOAT2 homingCenterPosition = GetTransform()->GetCenterPosition();
-    moveDirection_ = XMFloat2Normalize(playerCenterPosition - homingCenterPosition);
+    const DirectX::XMFLOAT2 moveVec = playerCenterPosition - homingCenterPosition;
+    length_ = XMFloat2Length(moveVec);
+    moveDirection_ = XMFloat2Normalize(moveVec);
     GetTransform()->AddPosition(moveDirection_ * moveSpeed_ * elapsedTime);
     // 角度
     GetTransform()->SetAngle(DirectX::XMConvertToDegrees(atan2f(moveDirection_.y, moveDirection_.x) + DirectX::XM_PIDIV2));

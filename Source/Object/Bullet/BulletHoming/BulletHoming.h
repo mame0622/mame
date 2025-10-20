@@ -20,5 +20,9 @@ private:
     void Pursuit(const float& elapsedTime);
 private:
     DirectX::XMFLOAT2   moveDirection_ = {};
-    float               moveSpeed_ = 300.0f;
+    float               moveSpeed_ = 500.0f;
+
+    float length_ = 0;
+
+    int state_ = 0;
 };
