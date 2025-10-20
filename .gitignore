@@ -1,6 +1,4 @@
 .vs/
-External/
-Mame/
-x64/Debug/Mame.exe
-x64/Debug/Mame.pdb
+x64/
 Resources/
+External/
