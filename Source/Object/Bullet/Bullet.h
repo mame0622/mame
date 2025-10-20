@@ -21,9 +21,6 @@ public:
     void SetBulletNumber(const int& bulletNumber) { bulletNumber_ = bulletNumber; }
     const int GetBulletNumber() const { return bulletNumber_; }
 
-    void SetCollisionActive(const bool& flag) { isCollisionActive_ = flag; }
-    const bool IsCollisionActive() const { return isCollisionActive_; }
-
     // Collision‚ÌŒãˆ—
     void CollisionRemove();
 
@@ -32,8 +29,6 @@ private:
     
     // ---------- g—p‚µ‚Ä‚¢‚éBullet Number ----------
     int bulletNumber_ = 0;
-
-    bool    isCollisionActive_  = true;
 
     Collision* collision_;
 };
