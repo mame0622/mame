@@ -136,6 +136,12 @@
     <Filter Include="Mame\Object\Bullet\BulletHoming">
       <UniqueIdentifier>{b3314476-5d14-4c2d-b320-7c60ccc0f3ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Effect">
+      <UniqueIdentifier>{20d27549-64a3-4419-a362-c14717a8ce48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mame\Object\Effect\EffectBlink">
+      <UniqueIdentifier>{93da6fd9-8d98-43d0-b27e-ee2f69ed4c9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
@@ -305,6 +311,15 @@
     </ClCompile>
     <ClCompile Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobotState.cpp">
       <Filter>Mame\Object\Character\Enemy\EnemyRobot</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Effect\Effect.cpp">
+      <Filter>Mame\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Effect\EffectManager.cpp">
+      <Filter>Mame\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Effect\EffectBlink\EffectBlink.cpp">
+      <Filter>Mame\Object\Effect\EffectBlink</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -502,6 +517,15 @@
     </ClInclude>
     <ClInclude Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobotState.h">
       <Filter>Mame\Object\Character\Enemy\EnemyRobot</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Effect\Effect.h">
+      <Filter>Mame\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Effect\EffectManager.h">
+      <Filter>Mame\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Effect\EffectBlink\EffectBlink.h">
+      <Filter>Mame\Object\Effect\EffectBlink</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

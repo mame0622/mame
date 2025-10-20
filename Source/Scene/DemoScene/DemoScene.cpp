@@ -7,6 +7,7 @@
 #include "Collision/CollisionManager.h"
 #include "Object/Skill/SkillManager.h"
 #include "Object/Character/Enemy/EnemyPlanaria/EnemyPlanaria.h"
+#include "Object/Effect/EffectManager.h"
 
 // ÉäÉ\Å[ÉXê∂ê¨
 void DemoScene::CreateResource()
@@ -55,6 +56,8 @@ void DemoScene::Update(const float& elapsedTime)
 
         enemySpawnTimer_ = 3.0f;
     }
+
+    EffectManager::Instance().Update(elapsedTime);
 }
 
 // ï`âÊ
@@ -64,6 +67,8 @@ void DemoScene::Render()
     Graphics::Instance().SetRasterizerState(Shader::RasterState::CullNone);
     Graphics::Instance().SetDepthStencileState(Shader::DepthState::ZT_OFF_ZW_OFF);
 
+    EffectManager::Instance().Render();
+    
     PlayerManager::Instance().Render();
 
     EnemyManager::Instance().Render();
@@ -71,6 +76,7 @@ void DemoScene::Render()
     BulletManager::Instance().Render();
 
     SkillManager::Instance().Render();
+
 }
 
 // ImGui
@@ -83,4 +89,6 @@ void DemoScene::DrawDebug()
     BulletManager::Instance().DrawDebug();
 
     SkillManager::Instance().DrawDebug();
+
+    EffectManager::Instance().DrawDebug();
 }

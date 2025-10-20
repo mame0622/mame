@@ -30,16 +30,29 @@ private:
 
     // ---------- Move ----------
     DirectX::XMFLOAT2   moveDirection_ = { 0.0f, -1.0f };
-    float               moveSpeed_      = 500.0f;
+    float               moveSpeed_      = 250.0f;
 
     DirectX::XMFLOAT2   blinkDirection_     = {};
-    float               blinkPower_         = 2000.0f;
+    float               blinkPower_         = 1000.0f;
     float               currentBlinkPower_  = 0.0f;
-    float               deceleration_       = 8000.0f;
+    float               deceleration_       = 3000.0f;
 
 
     Collision* collision_;
 
     DirectX::XMFLOAT2 collisionOffset_ = { 40.0f, 40.0f };
+
+
+    // ---------- BlinkEffect ----------
+    DirectX::XMFLOAT2 effectSize[3] =
+    {
+        { 20.0f, 50.0f },
+        { 20.0f, 70.0f },
+        { 30.0f, 90.0f },
+    };
+    const int   maxEffectCount_             = 3; // ç≈ëÂê∂ê¨êî
+    int         currentEffectCount_         = 3; // åªç›ÇÃê∂ê¨êî
+    int         maxEffectFrameCount_[3]     = { 5, 20, 30 };
+    int         currentEffectFrameCount_    = 0;
 };
 

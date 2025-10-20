@@ -6,6 +6,8 @@
 #include "Object/Skill/SkillChainLightning/SkillChainLightning.h"
 #include "Object/Skill/SkillSplitThunder/SkillSplitThunder.h"
 
+#include "Object/Effect/EffectBlink/EffectBlink.h"
+
 Player::Player()
     : Character("Player"), 
     spriteBatch_(L"./Resources/Image/Player/Player.png", 1),
@@ -68,6 +70,20 @@ void Player::Update(const float& elapsedTime)
 
     // ‰æ–Ê“à‚ÉˆÊ’u‚ðŽû‚ß‚é
     ClampPosition();
+
+    ++currentEffectFrameCount_;
+    if (currentEffectFrameCount_ == maxEffectFrameCount_[currentEffectCount_])
+    {
+        if (currentEffectCount_ < maxEffectCount_)
+        {
+            EffectBlink* effect = new EffectBlink();
+            effect->Initialize(GetTransform()->GetCenterPosition(),
+                effectSize[currentEffectCount_].x, effectSize[currentEffectCount_].y);
+
+            currentEffectFrameCount_ = 0;
+            ++currentEffectCount_;
+        }
+    }
 }
 
 // •`‰æ
@@ -84,6 +100,14 @@ void Player::DrawDebug()
 #if USE_IMGUI
     ImGui::Begin(GetName().c_str());
 
+    ImGui::DragFloat2("EffectSize0", &effectSize[0].x);
+    ImGui::DragFloat2("EffectSize1", &effectSize[1].x);
+    ImGui::DragFloat2("EffectSize2", &effectSize[2].x);
+    ImGui::DragInt("FrameCount0", &maxEffectFrameCount_[0]);
+    ImGui::DragInt("FrameCount1", &maxEffectFrameCount_[1]);
+    ImGui::DragInt("FrameCount2", &maxEffectFrameCount_[2]);
+
+    ImGui::DragFloat("MoveSpeed", &moveSpeed_);
     ImGui::DragFloat("BlinkPower", &blinkPower_);
     ImGui::DragFloat("Deceleration", &deceleration_);
 
@@ -141,6 +165,9 @@ void Player::Blink()
 {
     blinkDirection_ = moveDirection_;
     currentBlinkPower_ = blinkPower_;
+
+    currentEffectCount_ = 0;
+    currentEffectFrameCount_ = 0;
 }
 
 // ‰æ–Ê“à‚ÉˆÊ’u‚ðŽû‚ß‚é
