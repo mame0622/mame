@@ -21,7 +21,7 @@ private:
     DirectX::XMFLOAT2   moveDirection_  = {};
     float               moveSpeed_      = 0;
 
-    float generateOffset_ = 100.0f;
+    float generateOffset_ = 150.0f;
 
     const float size_ = 200.0f;
 

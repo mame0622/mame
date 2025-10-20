@@ -1,11 +1,12 @@
 #pragma once
+
 #include "Object/Bullet/Bullet.h"
 
-class BulletStraight : public Bullet
+class BulletHoming : public Bullet
 {
 public:
-    BulletStraight();
-    ~BulletStraight() override {}
+    BulletHoming();
+    ~BulletHoming() override {}
 
     void Initialize(const DirectX::XMFLOAT2& generatePosition);
     void Update(const float& elapsedTime) override;
@@ -15,10 +16,9 @@ public:
 
     void Launch(const DirectX::XMFLOAT2& moveDirection);
 
-    
+private:
+    void Pursuit(const float& elapsedTime);
 private:
     DirectX::XMFLOAT2   moveDirection_ = {};
-    float               moveSpeed_ = 0;
-    float               alpha_ = 0;
+    float               moveSpeed_ = 300.0f;
 };
-

@@ -133,6 +133,9 @@
     <Filter Include="Mame\Object\Character\Enemy\EnemyRobot">
       <UniqueIdentifier>{c876cc79-6bba-43de-9d5a-8089327ed9ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mame\Object\Bullet\BulletHoming">
+      <UniqueIdentifier>{9ebaba27-c353-4e02-b808-f019a3000337}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application\Main.cpp">
@@ -293,6 +296,9 @@
     </ClCompile>
     <ClCompile Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobot.cpp">
       <Filter>Mame\Object\Character\Enemy\EnemyRobot</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Bullet\BulletHoming\BulletHoming.cpp">
+      <Filter>Mame\Object\Bullet\BulletHoming</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -481,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="Source\Object\Character\Enemy\EnemyRobot\EnemyRobot.h">
       <Filter>Mame\Object\Character\Enemy\EnemyRobot</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Bullet\BulletHoming\BulletHoming.h">
+      <Filter>Mame\Object\Bullet\BulletHoming</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
