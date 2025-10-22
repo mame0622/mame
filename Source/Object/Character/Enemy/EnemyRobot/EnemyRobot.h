@@ -14,6 +14,10 @@ public:
 
     void OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position) override;
 
+    const DirectX::XMFLOAT2 GetMoveDirection() const { return moveDirection_; }
+
+    void SetMoveDirection(const DirectX::XMFLOAT2& moveDirection) { moveDirection_ = moveDirection; }
+
 private:
     void Pursuit(const float& elapsedTime);
 
