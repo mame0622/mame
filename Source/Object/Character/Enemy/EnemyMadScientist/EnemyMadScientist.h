@@ -16,10 +16,13 @@ public:
 
 private:
     void Turn();
+    void Move(const float& elapsedTime);
 
 private:
-    DirectX::XMFLOAT2 moveVec_ = {};
+    DirectX::XMFLOAT2 moveDirection_ = {};
     float moveSpeed_ = 300.0f;
 
     const float size_ = 100.0f;
+
+    DirectX::XMFLOAT2 targetPosition = {};
 };

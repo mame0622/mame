@@ -18,7 +18,6 @@ void EnemyRobot::Initialize()
     GetTransform()->SetTexSize(size_);
     GetTransform()->SetPivot(size_ * 0.5f);
 
-    GetTransform()->SetPosition(300.0f, 400.0f);
 }
 
 // XV
@@ -88,6 +87,5 @@ void EnemyRobot::BulletGeneration(const DirectX::XMFLOAT2 enemyCenterPosition)
 
         bulletStraight->Initialize(generatePosition);
         bulletStraight->Launch(newMoveDirection);
-
     }
 }
