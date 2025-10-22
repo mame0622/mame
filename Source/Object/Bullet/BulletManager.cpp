@@ -169,7 +169,9 @@ void BulletManager::Launch()
     case Bullet::BulletLevel::One:
     {
         BulletLevel1* level1 = new BulletLevel1();
-        level1->Initialize(launchIndex_, bulletSize_, orvitRadius_, direction);
+        // C³‚·‚é
+        level1->Initialize(launchIndex_, bulletSize_, orvitRadius_);
+        level1->Launch(direction);
 
         orvitBullets_.at(launchIndex_)->SetCollisionActive(false);
     }

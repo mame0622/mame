@@ -76,7 +76,6 @@ void EnemyRobot::BulletGeneration(const DirectX::XMFLOAT2 enemyCenterPosition)
 
         // 今は仮でホーミングとストレート扱ってる。もっときれいにしなあかん。
         BulletHoming* bulletStraight = new BulletHoming;
-        BulletManager::Instance().Register(bulletStraight);
 
         const DirectX::XMFLOAT2 newMoveDirection =
         {

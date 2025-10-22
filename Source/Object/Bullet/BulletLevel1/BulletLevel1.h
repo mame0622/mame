@@ -8,9 +8,11 @@ public:
     ~BulletLevel1() override {}
 
     void Initialize(const int& bulletNumber, const DirectX::XMFLOAT2& bulletSize,
-        const float& length, const DirectX::XMFLOAT2& moveDirection);
+        const float& length);
     void Update(const float& elapsedTime) override;
     void DrawDebug() override;
+
+    void Launch(const DirectX::XMFLOAT2& direction);
 
     void OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position) override;
 

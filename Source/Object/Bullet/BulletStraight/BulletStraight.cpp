@@ -5,7 +5,6 @@ BulletStraight::BulletStraight()
     :Bullet("BulletLevel1", BulletLevel::One,
         Collision::Type::Bullet, this, 25.0f)
 {
-
 }
 
 void BulletStraight::Initialize(const DirectX::XMFLOAT2& generatePosition)

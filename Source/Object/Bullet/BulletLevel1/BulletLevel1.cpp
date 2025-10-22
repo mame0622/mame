@@ -7,12 +7,10 @@ BulletLevel1::BulletLevel1()
     : Bullet("BulletLevel1", BulletLevel::One,
         Collision::Type::Bullet, this, 25.0f)
 {
-    // マネージャーに登録
-    BulletManager::Instance().Register(this);
 }
 
 // 初期化
-void BulletLevel1::Initialize(const int& bulletNumber, const DirectX::XMFLOAT2& bulletSize, const float& length, const DirectX::XMFLOAT2& moveDirection)
+void BulletLevel1::Initialize(const int& bulletNumber, const DirectX::XMFLOAT2& bulletSize, const float& length)
 {
     // BulletNumber設定
     SetBulletNumber(bulletNumber);
@@ -21,9 +19,6 @@ void BulletLevel1::Initialize(const int& bulletNumber, const DirectX::XMFLOAT2& 
     GetTransform()->SetSize(bulletSize);
     GetTransform()->SetTexSize(bulletSize);
     GetTransform()->SetPivot(bulletSize * 0.5f);
-
-    // 進行方向設定
-    moveDirection_ = moveDirection;
 
     // 生成位置設定
     const DirectX::XMFLOAT2 playerCenterPosition = PlayerManager::Instance().GetTransform()->GetCenterPosition();
@@ -56,6 +51,13 @@ void BulletLevel1::DrawDebug()
     }
 
 #endif // USE_IMGUI
+}
+
+// 発射
+void BulletLevel1::Launch(const DirectX::XMFLOAT2& direction)
+{
+    // 進行方向設定
+    moveDirection_ = direction;
 }
 
 // 衝突検知
