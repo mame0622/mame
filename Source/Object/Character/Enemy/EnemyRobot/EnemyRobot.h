@@ -28,4 +28,6 @@ private:
     const float size_ = 200.0f;
 
     int state_ = 0;
+
+    int power_ = 5;
 };

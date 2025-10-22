@@ -42,6 +42,7 @@ void EnemyRobot::Update(const float& elapsedTime)
 
 void EnemyRobot::DrawDebug()
 {
+    ImGui::DragInt("Power", &power_);
 }
 
 void EnemyRobot::OnHit(const Collision::Type& type, const DirectX::XMFLOAT2& position)
@@ -87,7 +88,7 @@ void EnemyRobot::BulletGeneration(const DirectX::XMFLOAT2 enemyCenterPosition)
         const DirectX::XMFLOAT2 generatePosition = enemyCenterPosition + newMoveDirection * generateOffset_;
 
         bulletStraight->Initialize(generatePosition);
-        bulletStraight->Launch(newMoveDirection);
+        bulletStraight->Launch(newMoveDirection, power_);
 
     }
 }
